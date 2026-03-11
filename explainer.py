@@ -7,12 +7,17 @@ Uses Anthropic Claude API to explain topics at different skill levels.
 import os
 from dotenv import load_dotenv
 import anthropic
+import streamlit as st
 
 # Load environment variables
 load_dotenv()
 
-# Configure Anthropic API
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+# Configure Anthropic API - check st.secrets first (Streamlit Cloud), then env vars (local)
+try:
+    ANTHROPIC_API_KEY = st.secrets.get("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+except:
+    ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+
 client = None
 if ANTHROPIC_API_KEY:
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
