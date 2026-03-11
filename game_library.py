@@ -10,7 +10,7 @@ DSA_GAMES = {
     "sorting_arena": {
         "id": "sorting_arena",
         "name": "Sorting Arena",
-        "icon": "🔢",
+        "icon": "",
         "category": "arrays",
         "difficulty": "Beginner",
         "description": "Swap numbers until sorted. Master different sorting algorithms!",
@@ -32,7 +32,7 @@ DSA_GAMES = {
     "binary_tree_builder": {
         "id": "binary_tree_builder",
         "name": "Binary Tree Builder",
-        "icon": "🌳",
+        "icon": "",
         "category": "trees",
         "difficulty": "Intermediate",
         "description": "Build binary search trees by inserting nodes correctly",
@@ -53,7 +53,7 @@ DSA_GAMES = {
     "stack_tower": {
         "id": "stack_tower",
         "name": "Stack Tower",
-        "icon": "🏗️",
+        "icon": "",
         "category": "stacks",
         "difficulty": "Beginner",
         "description": "Perform stack operations to solve challenges",
@@ -74,7 +74,7 @@ DSA_GAMES = {
     "queue_traffic_controller": {
         "id": "queue_traffic_controller",
         "name": "Queue Traffic Controller",
-        "icon": "🚗",
+        "icon": "",
         "category": "queues",
         "difficulty": "Beginner",
         "description": "Release cars in FIFO order. Break order = system crash!",
@@ -95,7 +95,7 @@ DSA_GAMES = {
     "graph_maze_explorer": {
         "id": "graph_maze_explorer",
         "name": "Graph Maze Explorer",
-        "icon": "🗺️",
+        "icon": "",
         "category": "graphs",
         "difficulty": "Advanced",
         "description": "Navigate maze using BFS, DFS, or Dijkstra to find shortest path",
@@ -116,7 +116,7 @@ DSA_GAMES = {
     "hash_table_defender": {
         "id": "hash_table_defender",
         "name": "Hash Table Defender",
-        "icon": "🛡️",
+        "icon": "",
         "category": "hashing",
         "difficulty": "Advanced",
         "description": "Store keys in hash table slots. Resolve collisions!",
@@ -137,7 +137,7 @@ DSA_GAMES = {
     "algorithm_race": {
         "id": "algorithm_race",
         "name": "Algorithm Race",
-        "icon": "🏁",
+        "icon": "",
         "category": "algorithms",
         "difficulty": "Expert",
         "description": "Watch algorithms race! See performance differences visually",
@@ -158,12 +158,12 @@ DSA_GAMES = {
     "algorithm_arena_boss": {
         "id": "algorithm_arena_boss",
         "name": "Algorithm Arena",
-        "icon": "⚔️",
+        "icon": "",
         "category": "boss",
         "difficulty": "Boss",
         "description": "Design system handling 1M searches/sec. Choose best structure!",
         "inspired_by": "Boss battle games",
-        "gameplay": "Multi-stage: Theory → Implementation → Optimization",
+        "gameplay": "Multi-stage: Theory -> Implementation -> Optimization",
         "mechanics": {
             "multi_phase": True,
             "design_challenge": True,
@@ -183,7 +183,7 @@ DBMS_GAMES = {
     "sql_detective": {
         "id": "sql_detective",
         "name": "SQL Detective",
-        "icon": "🔍",
+        "icon": "",
         "category": "queries",
         "difficulty": "Beginner",
         "description": "Solve data crimes by building SQL queries",
@@ -204,12 +204,12 @@ DBMS_GAMES = {
     "database_architect": {
         "id": "database_architect",
         "name": "Database Architect",
-        "icon": "🏗️",
+        "icon": "",
         "category": "schema",
         "difficulty": "Intermediate",
         "description": "Design database schemas. Drag tables, connect relationships",
         "inspired_by": "City builder games",
-        "gameplay": "Build schema: Users → Orders → Products. Set keys and relationships",
+        "gameplay": "Build schema: Users -> Orders -> Products. Set keys and relationships",
         "mechanics": {
             "schema_design": True,
             "relationship_mapping": True,
@@ -225,7 +225,7 @@ DBMS_GAMES = {
     "query_optimizer": {
         "id": "query_optimizer",
         "name": "Query Optimizer",
-        "icon": "⚡",
+        "icon": "",
         "category": "optimization",
         "difficulty": "Advanced",
         "description": "Fix slow queries using indexes, joins, and filters",
@@ -246,7 +246,7 @@ DBMS_GAMES = {
     "transaction_manager": {
         "id": "transaction_manager",
         "name": "Transaction Manager",
-        "icon": "🔐",
+        "icon": "",
         "category": "transactions",
         "difficulty": "Advanced",
         "description": "Handle simultaneous transactions. Ensure ACID properties!",
@@ -267,7 +267,7 @@ DBMS_GAMES = {
     "index_hunter": {
         "id": "index_hunter",
         "name": "Index Hunter",
-        "icon": "🎯",
+        "icon": "",
         "category": "indexing",
         "difficulty": "Intermediate",
         "description": "Identify where to add indexes. Watch query time improve!",
@@ -288,10 +288,10 @@ DBMS_GAMES = {
     "data_cleanup": {
         "id": "data_cleanup",
         "name": "Data Cleanup",
-        "icon": "✨",
+        "icon": "",
         "category": "normalization",
         "difficulty": "Intermediate",
-        "description": "Normalize tables from 1NF → 2NF → 3NF",
+        "description": "Normalize tables from 1NF -> 2NF -> 3NF",
         "inspired_by": "Match puzzle games",
         "gameplay": "Duplicate data appears. Split tables to normalize!",
         "mechanics": {
@@ -309,12 +309,12 @@ DBMS_GAMES = {
     "server_crisis_boss": {
         "id": "server_crisis_boss",
         "name": "Server Crisis",
-        "icon": "🏛️",
+        "icon": "",
         "category": "boss",
         "difficulty": "Boss",
         "description": "Database server crashes! Redesign schema, optimize everything!",
         "inspired_by": "Crisis management games",
-        "gameplay": "Multi-phase: Fix schema → Optimize queries → Add indexes",
+        "gameplay": "Multi-phase: Fix schema -> Optimize queries -> Add indexes",
         "mechanics": {
             "multi_phase": True,
             "system_rescue": True,
@@ -334,7 +334,7 @@ MATH_GAMES = {
     "equation_shooter": {
         "id": "equation_shooter",
         "name": "Equation Shooter",
-        "icon": "🎯",
+        "icon": "",
         "category": "algebra",
         "difficulty": "Beginner",
         "description": "Equations fall from sky. Shoot the correct answer!",
@@ -355,12 +355,12 @@ MATH_GAMES = {
     "graph_matcher": {
         "id": "graph_matcher",
         "name": "Graph Matcher",
-        "icon": "📊",
+        "icon": "",
         "category": "functions",
         "difficulty": "Intermediate",
         "description": "Match graphs to their equations",
         "inspired_by": "Matching puzzle games",
-        "gameplay": "Graph shown. Choose: y=x², y=2x, y=sin(x)",
+        "gameplay": "Graph shown. Choose: y=x^2, y=2x, y=sin(x)",
         "mechanics": {
             "pattern_matching": True,
             "visual_recognition": True,
@@ -376,7 +376,7 @@ MATH_GAMES = {
     "geometry_builder": {
         "id": "geometry_builder",
         "name": "Geometry Builder",
-        "icon": "📐",
+        "icon": "",
         "category": "geometry",
         "difficulty": "Intermediate",
         "description": "Build shapes using geometric formulas",
@@ -397,7 +397,7 @@ MATH_GAMES = {
     "probability_casino": {
         "id": "probability_casino",
         "name": "Probability Casino",
-        "icon": "🎲",
+        "icon": "",
         "category": "probability",
         "difficulty": "Advanced",
         "description": "Predict outcomes and calculate probabilities to win coins",
@@ -418,7 +418,7 @@ MATH_GAMES = {
     "calculus_runner": {
         "id": "calculus_runner",
         "name": "Calculus Runner",
-        "icon": "📈",
+        "icon": "",
         "category": "calculus",
         "difficulty": "Advanced",
         "description": "Endless runner through functions. Pick correct derivatives!",
@@ -439,7 +439,7 @@ MATH_GAMES = {
     "number_labyrinth": {
         "id": "number_labyrinth",
         "name": "Number Labyrinth",
-        "icon": "🧩",
+        "icon": "",
         "category": "logic",
         "difficulty": "Expert",
         "description": "Navigate maze by solving math puzzles to open gates",
@@ -460,7 +460,7 @@ MATH_GAMES = {
     "math_wizard_boss": {
         "id": "math_wizard_boss",
         "name": "Math Wizard Challenge",
-        "icon": "🔬",
+        "icon": "",
         "category": "boss",
         "difficulty": "Boss",
         "description": "Timed challenge solving multiple puzzles quickly",

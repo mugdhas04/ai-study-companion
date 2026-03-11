@@ -1,0 +1,26 @@
+# Render Blueprint - Deploy both Streamlit and FastAPI
+services:
+  # Main Streamlit App
+  - type: web
+    name: ai-study-companion
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: API_SERVER_URL
+        fromService:
+          type: web
+          name: ai-study-api
+          property: host
+
+  # FastAPI Server for Mini-Games
+  - type: web
+    name: ai-study-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api_server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false

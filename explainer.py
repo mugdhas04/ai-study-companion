@@ -77,12 +77,12 @@ FORMAT YOUR RESPONSE EXACTLY LIKE THIS:
 
 ---
 
-## 🎯 WHAT IS IT?
+## WHAT IS IT?
 [2-3 sentences giving a clear, direct definition. No stories - just explain what this concept IS.]
 
 ---
 
-## 🔑 KEY CONCEPTS
+## KEY CONCEPTS
 
 ### 1. [First Key Concept]
 **Definition:** [One clear sentence]
@@ -107,7 +107,7 @@ FORMAT YOUR RESPONSE EXACTLY LIKE THIS:
 
 ---
 
-## 💻 CODE EXAMPLE
+## CODE EXAMPLE
 ```python
 # Practical code example demonstrating the concept
 # Include comments explaining each step
@@ -117,12 +117,12 @@ FORMAT YOUR RESPONSE EXACTLY LIKE THIS:
 
 ---
 
-## 📊 HOW IT WORKS (Step by Step)
+## HOW IT WORKS (Step by Step)
 
 ```
 [ASCII flowchart or step diagram showing the process]
 Example:
-INPUT → STEP 1 → STEP 2 → STEP 3 → OUTPUT
+INPUT -> STEP 1 -> STEP 2 -> STEP 3 -> OUTPUT
 ```
 
 1. **Step 1:** [What happens first]
@@ -131,7 +131,7 @@ INPUT → STEP 1 → STEP 2 → STEP 3 → OUTPUT
 
 ---
 
-## ⚡ QUICK COMPARISON
+## QUICK COMPARISON
 | Feature | This Concept | Alternative |
 |---------|--------------|-------------|
 | [Aspect] | [Value] | [Value] |
@@ -139,14 +139,14 @@ INPUT → STEP 1 → STEP 2 → STEP 3 → OUTPUT
 
 ---
 
-## 🎓 KEY TAKEAWAYS
-- ✅ [Most important point to remember]
-- ✅ [Second important point]
-- ✅ [Third important point]
+## KEY TAKEAWAYS
+- [Most important point to remember]
+- [Second important point]
+- [Third important point]
 
 ---
 
-## 🔗 REAL-WORLD USE
+## REAL-WORLD USE
 **Where it's used:** [Specific applications]
 **Why it matters:** [Practical importance]
 
@@ -227,7 +227,7 @@ def explain_with_examples(topic, level, num_examples=3):
         return message.content[0].text
         
     except Exception as e:
-        return f"❌ Error generating explanation: {str(e)}"
+        return f"Error generating explanation: {str(e)}"
 
 
 def quick_explain(topic):
@@ -262,7 +262,7 @@ def quick_explain(topic):
         return message.content[0].text
         
     except Exception as e:
-        return f"❌ Error: {str(e)}"
+        return f"Error: {str(e)}"
 
 
 def compare_topics(topic1, topic2, level="Intermediate"):
@@ -311,7 +311,7 @@ def compare_topics(topic1, topic2, level="Intermediate"):
         return message.content[0].text
         
     except Exception as e:
-        return f"❌ Error generating comparison: {str(e)}"
+        return f"Error generating comparison: {str(e)}"
 
 
 # For testing the module directly

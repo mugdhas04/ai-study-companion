@@ -506,7 +506,7 @@ def render_game_hub():
             ''', unsafe_allow_html=True)
             # Invisible button overlay
             st.markdown('<div class="card-click-zone">', unsafe_allow_html=True)
-            if st.button("▶", key="play_dsa", use_container_width=True, help="Click to enter DSA Adventure"):
+            if st.button(">", key="play_dsa", use_container_width=True, help="Click to enter DSA Adventure"):
                 st.session_state.current_game = "dsa"
                 st.session_state.current_level = None
                 st.rerun()
@@ -527,7 +527,7 @@ def render_game_hub():
                 </div>
             ''', unsafe_allow_html=True)
             st.markdown('<div class="card-click-zone">', unsafe_allow_html=True)
-            if st.button("▶", key="play_dbms", use_container_width=True, help="Click to enter Database Quest"):
+            if st.button(">", key="play_dbms", use_container_width=True, help="Click to enter Database Quest"):
                 st.session_state.current_game = "dbms"
                 st.session_state.current_level = None
                 st.rerun()
@@ -548,7 +548,7 @@ def render_game_hub():
                 </div>
             ''', unsafe_allow_html=True)
             st.markdown('<div class="card-click-zone">', unsafe_allow_html=True)
-            if st.button("▶", key="play_maths", use_container_width=True, help="Click to enter Math Arena"):
+            if st.button(">", key="play_maths", use_container_width=True, help="Click to enter Math Arena"):
                 st.session_state.current_game = "maths"
                 st.session_state.current_level = None
                 st.rerun()
@@ -659,7 +659,7 @@ def render_game_hub():
                         st.rerun()
     
     # Footer
-    st.markdown('<div class="hub-footer">LEARN • PLAY • LEVEL UP</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hub-footer">LEARN - PLAY - LEVEL UP</div>', unsafe_allow_html=True)
 
 
 def main():

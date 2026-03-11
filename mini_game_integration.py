@@ -28,7 +28,7 @@ def render_mini_game(game_name: str, username: str, game_id: str, level_id: int,
     game_js_path = game_dir / "game.js"
     
     if not game_html_path.exists():
-        st.error(f"❌ Game not found: {game_name}")
+        st.error(f"Game not found: {game_name}")
         st.info(f"Expected path: {game_html_path}")
         return
     
@@ -74,7 +74,7 @@ def render_mini_game(game_name: str, username: str, game_id: str, level_id: int,
             api_client_js = f.read()
         
     except Exception as e:
-        st.error(f"❌ Error loading game files: {str(e)}")
+        st.error(f"Error loading game files: {str(e)}")
         return
     
     # Inject game parameters via script
@@ -131,133 +131,133 @@ def get_available_mini_games():
             "description": "Master sorting algorithms in an interactive arena",
             "subject": "DSA",
             "difficulty": "Intermediate",
-            "icon": "🔢"
+            "icon": ""
         },
         "array-sorter": {
             "name": "Array Sorter",
             "description": "Sort arrays by swapping elements - learn sorting basics",
             "subject": "DSA",
             "difficulty": "Beginner",
-            "icon": "🎯"
+            "icon": ""
         },
         "link-builder": {
             "name": "Link Chain Builder",
             "description": "Build linked lists by connecting nodes",
             "subject": "DSA",
             "difficulty": "Intermediate",
-            "icon": "🔗"
+            "icon": ""
         },
         "stack-tower": {
             "name": "Stack Tower",
             "description": "Learn Stack (LIFO) by building towers",
             "subject": "DSA",
             "difficulty": "Beginner",
-            "icon": "🏗️"
+            "icon": ""
         },
         "tree-builder": {
             "name": "Binary Tree Builder",
             "description": "Build and traverse binary trees",
             "subject": "DSA",
             "difficulty": "Intermediate",
-            "icon": "🌳"
+            "icon": ""
         },
         "graph-explorer": {
             "name": "Graph Path Explorer",
             "description": "Navigate through graphs and find shortest paths",
             "subject": "DSA",
             "difficulty": "Advanced",
-            "icon": "🗺️"
+            "icon": ""
         },
         "hash-defender": {
             "name": "Hash Defender",
             "description": "Insert keys into hash tables and handle collisions",
             "subject": "DSA",
             "difficulty": "Intermediate",
-            "icon": "🛡️"
+            "icon": ""
         },
         "queue-controller": {
             "name": "Queue Traffic Controller",
             "description": "Release cars in FIFO order - learn queue operations",
             "subject": "DSA",
             "difficulty": "Beginner",
-            "icon": "🚗"
+            "icon": ""
         },
         "algorithm-race": {
             "name": "Algorithm Race",
             "description": "Watch algorithms compete and predict the winner",
             "subject": "DSA",
             "difficulty": "Expert",
-            "icon": "🏁"
+            "icon": ""
         },
         "algorithm-boss": {
             "name": "Algorithm Arena",
             "description": "Epic 3-phase boss battle - Theory, Design, Optimization",
             "subject": "DSA",
             "difficulty": "Boss",
-            "icon": "🐉"
+            "icon": ""
         },
         "sql-detective": {
             "name": "SQL Detective",
             "description": "Solve database queries to find data",
             "subject": "DBMS",
             "difficulty": "Intermediate",
-            "icon": "🔍"
+            "icon": ""
         },
         "schema-builder": {
             "name": "Schema Builder",
             "description": "Design ER diagrams with entities and relationships",
             "subject": "DBMS",
             "difficulty": "Intermediate",
-            "icon": "📊"
+            "icon": ""
         },
         "query-optimizer": {
             "name": "Query Optimizer",
             "description": "Learn database indexing strategies",
             "subject": "DBMS",
             "difficulty": "Advanced",
-            "icon": "⚡"
+            "icon": ""
         },
         "transaction-simulator": {
             "name": "Transaction Simulator",
             "description": "Master ACID properties with bank transactions",
             "subject": "DBMS",
             "difficulty": "Advanced",
-            "icon": "🔒"
+            "icon": ""
         },
         "equation-shooter": {
             "name": "Equation Shooter",
             "description": "Shoot correct answers to falling equations",
             "subject": "Maths",
             "difficulty": "Beginner",
-            "icon": "🎯"
+            "icon": ""
         },
         "matrix-master": {
             "name": "Matrix Master",
             "description": "Solve matrix operations - addition, multiplication, determinants",
             "subject": "Maths",
             "difficulty": "Intermediate",
-            "icon": "🔢"
+            "icon": ""
         },
         "probability-dice": {
             "name": "Probability Dice",
             "description": "Learn probability with interactive dice challenges",
             "subject": "Maths",
             "difficulty": "Intermediate",
-            "icon": "🎲"
+            "icon": ""
         },
         "logic-gates": {
             "name": "Logic Gates",
             "description": "Master AND, OR, XOR and other logic gates",
             "subject": "Maths",
             "difficulty": "Intermediate",
-            "icon": "⚡"
+            "icon": ""
         },
         "prime-hunter": {
             "name": "Prime Hunter",
             "description": "Hunt primes, find GCD/LCM - number theory fun",
             "subject": "Maths",
             "difficulty": "Intermediate",
-            "icon": "🎯"
+            "icon": ""
         }
     }
 
@@ -283,7 +283,7 @@ def render_mini_game_selector(subject: str):
         return None
     
     # Display game cards
-    st.markdown("### 🎮 MINI-GAMES")
+    st.markdown("### MINI-GAMES")
     
     cols = st.columns(min(len(games), 3))
     

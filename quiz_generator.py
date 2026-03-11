@@ -386,7 +386,7 @@ def validate_answer(question, user_answer, correct_answer):
         "is_correct": is_correct,
         "user_answer": user_answer,
         "correct_answer": correct_answer,
-        "feedback": "✅ Correct! Great job!" if is_correct else f"❌ Incorrect. The correct answer was {correct_answer}."
+        "feedback": "Correct! Great job!" if is_correct else f"Incorrect. The correct answer was {correct_answer}."
     }
 
 

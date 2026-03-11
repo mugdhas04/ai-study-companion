@@ -14,17 +14,17 @@ import random
 GAME_TYPES = {
     "match": {
         "name": "Concept Match",
-        "icon": "🧩",
+        "icon": "[M]",
         "description": "Match terms with definitions"
     },
     "quiz": {
         "name": "Quick Quiz", 
-        "icon": "⚡",
+        "icon": "[Q]",
         "description": "Answer rapid-fire questions"
     },
     "sort": {
         "name": "Category Sort",
-        "icon": "📦",
+        "icon": "[S]",
         "description": "Sort items into categories"
     }
 }
@@ -141,7 +141,7 @@ def render_topic_game(topic, level_name, level_topic, level_number, total_levels
     
     # Generate game data if not exists
     if state["data"] is None:
-        if st.button("🎮 Start Game", type="primary", use_container_width=True):
+        if st.button("Start Game", type="primary", use_container_width=True):
             with st.spinner(f"Creating {game_info['name']} for {level_topic}..."):
                 data = generate_game_content(topic, level_topic, game_type)
                 if data:
@@ -160,7 +160,7 @@ def render_topic_game(topic, level_name, level_topic, level_number, total_levels
     # Reset button
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🔄 Play Again"):
+        if st.button("Play Again"):
             st.session_state[game_key] = {
                 "data": None, "score": 0, "completed": False,
                 "current_idx": 0, "matched": [], 
@@ -183,8 +183,7 @@ def render_match_game(state, colors):
     
     # Check completion
     if len(matched) >= len(pairs):
-        st.balloons()
-        st.success(f"🎉 All matched! Score: {state['score']} points")
+        st.success(f"All matched! Score: {state['score']} points")
         state["completed"] = True
         return
     
@@ -210,11 +209,11 @@ def render_match_game(state, colors):
             # Check if already matched
             is_matched = any(pairs[i]["term"] == term for i in matched)
             if is_matched:
-                st.markdown(f"~~{term}~~ ✓")
+                st.markdown(f"~~{term}~~ [done]")
             else:
                 is_selected = state.get("selected_term") == term
                 if st.button(
-                    f"{'→ ' if is_selected else ''}{term}",
+                    f"{'> ' if is_selected else ''}{term}",
                     key=f"term_{term}",
                     use_container_width=True,
                     type="primary" if is_selected else "secondary"
@@ -229,12 +228,12 @@ def render_match_game(state, colors):
         for defn in state["shuffled"]["definitions"]:
             is_matched = any(pairs[i]["definition"] == defn for i in matched)
             if is_matched:
-                st.markdown(f"~~{defn[:40]}...~~ ✓" if len(defn) > 40 else f"~~{defn}~~ ✓")
+                st.markdown(f"~~{defn[:40]}...~~ [done]" if len(defn) > 40 else f"~~{defn}~~ [done]")
             else:
                 is_selected = state.get("selected_def") == defn
                 display = defn[:40] + "..." if len(defn) > 40 else defn
                 if st.button(
-                    f"{'→ ' if is_selected else ''}{display}",
+                    f"{'> ' if is_selected else ''}{display}",
                     key=f"def_{defn[:30]}",
                     use_container_width=True,
                     type="primary" if is_selected else "secondary",
@@ -258,10 +257,10 @@ def check_match(state, pairs, matched):
             if pair["term"] == term and pair["definition"] == defn:
                 matched.append(idx)
                 state["score"] += 20
-                st.toast("✅ Correct match!", icon="✅")
+                st.toast("Correct match!")
                 break
         else:
-            st.toast("❌ Not a match", icon="❌")
+            st.toast("Not a match")
         
         state["selected_term"] = None
         state["selected_def"] = None
@@ -282,8 +281,7 @@ def render_quiz_game(state, colors):
     # Check completion
     if current >= len(questions):
         accuracy = (state["score"] / (len(questions) * 20)) * 100
-        st.balloons()
-        st.success(f"🎉 Quiz Complete! Score: {state['score']} ({accuracy:.0f}% accuracy)")
+        st.success(f"Quiz Complete! Score: {state['score']} ({accuracy:.0f}% accuracy)")
         state["completed"] = True
         return
     
@@ -303,10 +301,10 @@ def render_quiz_game(state, colors):
         if st.button(f"{chr(65+idx)}. {opt}", key=f"quiz_opt_{current}_{idx}", use_container_width=True):
             correct = q.get("correct", 0)
             if idx == correct:
-                st.success(f"✅ Correct! {q.get('explanation', '')}")
+                st.success(f"Correct! {q.get('explanation', '')}")
                 state["score"] += 20
             else:
-                st.error(f"❌ Wrong. {q.get('explanation', '')}")
+                st.error(f"Wrong. {q.get('explanation', '')}")
             state["current_idx"] = current + 1
             st.rerun()
     
@@ -351,8 +349,7 @@ def render_sort_game(state, colors):
             if item["correct_cat"] == 2:
                 correct += 1
         
-        st.balloons()
-        st.success(f"🎉 Sorted! {correct}/{len(all_items)} correct")
+        st.success(f"Sorted! {correct}/{len(all_items)} correct")
         state["completed"] = True
         return
     
@@ -375,16 +372,16 @@ def render_sort_game(state, colors):
             sorted_items["cat1"].append(current_item)
             is_correct = current_item["correct_cat"] == 1
             if is_correct:
-                st.toast("✅ Correct!", icon="✅")
+                st.toast("Correct!")
                 state["score"] += 15
             else:
-                st.toast("❌ Wrong category", icon="❌")
+                st.toast("Wrong category")
             state["current_idx"] = current + 1
             st.rerun()
         
         for item in sorted_items["cat1"]:
-            mark = "✅" if item["correct_cat"] == 1 else "❌"
-            st.markdown(f"• {item['item']} {mark}")
+            mark = "[OK]" if item["correct_cat"] == 1 else "[X]"
+            st.markdown(f"- {item['item']} {mark}")
     
     with col2:
         st.markdown(f"**{cat2['name']}**")
@@ -392,15 +389,15 @@ def render_sort_game(state, colors):
             sorted_items["cat2"].append(current_item)
             is_correct = current_item["correct_cat"] == 2
             if is_correct:
-                st.toast("✅ Correct!", icon="✅")
+                st.toast("Correct!")
                 state["score"] += 15
             else:
-                st.toast("❌ Wrong category", icon="❌")
+                st.toast("Wrong category")
             state["current_idx"] = current + 1
             st.rerun()
         
         for item in sorted_items["cat2"]:
-            mark = "✅" if item["correct_cat"] == 2 else "❌"
-            st.markdown(f"• {item['item']} {mark}")
+            mark = "[OK]" if item["correct_cat"] == 2 else "[X]"
+            st.markdown(f"- {item['item']} {mark}")
     
     st.progress(current / len(all_items))

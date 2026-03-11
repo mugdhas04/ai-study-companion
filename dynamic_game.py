@@ -234,7 +234,7 @@ def render_level_map(course, game_progress):
         # Show connector line between levels
         if level_id < 6:
             st.markdown(f'''
-                <div style="text-align: center; color: {course["color_1"]}44;">│</div>
+                <div style="text-align: center; color: {course["color_1"]}44;">|</div>
             ''', unsafe_allow_html=True)
 
 
@@ -292,7 +292,7 @@ def render_regular_level(course, level):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("📚 LEARN CONCEPT", use_container_width=True, type="primary"):
+        if st.button("LEARN CONCEPT", use_container_width=True, type="primary"):
             with st.spinner("Generating explanation..."):
                 explanation = explain_topic(level["topic"], difficulty)
                 st.session_state.explanation_result = explanation
@@ -302,7 +302,7 @@ def render_regular_level(course, level):
                 st.session_state.current_topic = level["topic"]
     
     with col2:
-        if st.button("📝 START QUIZ", use_container_width=True):
+        if st.button("START QUIZ", use_container_width=True):
             with st.spinner("Generating quiz..."):
                 quiz = generate_quiz(level["topic"], difficulty)
                 st.session_state.current_quiz = quiz
@@ -315,7 +315,7 @@ def render_regular_level(course, level):
                 st.rerun()
     
     with col3:
-        if st.button("🎮 PLAY GAMES", use_container_width=True):
+        if st.button("PLAY GAMES", use_container_width=True):
             st.session_state.show_topic_game = True
             st.session_state.show_quiz = False
             st.session_state.explanation_result = None

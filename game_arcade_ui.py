@@ -172,9 +172,9 @@ def render_game_arcade(subject: str, subject_color: str):
     
     # Title
     arcade_titles = {
-        "dsa": "🎮 DSA Arcade",
-        "dbms": "🎮 Database Arcade",
-        "math": "🎮 Math Arcade"
+        "dsa": "DSA Arcade",
+        "dbms": "Database Arcade",
+        "math": "Math Arcade"
     }
     
     st.markdown(f'<div class="arcade-title">{arcade_titles.get(subject, "Game Arcade")}</div>', unsafe_allow_html=True)
@@ -216,7 +216,7 @@ def render_game_arcade(subject: str, subject_color: str):
             ''', unsafe_allow_html=True)
             
             # Play button
-            button_label = "⚔️ FIGHT BOSS" if is_boss else "▶️ PLAY GAME"
+            button_label = "FIGHT BOSS" if is_boss else "PLAY GAME"
             button_type = "primary" if not is_boss else "secondary"
             
             if st.button(button_label, key=f"play_{game_id}", use_container_width=True, type=button_type):
@@ -231,7 +231,7 @@ def render_game_arcade(subject: str, subject_color: str):
                 st.rerun()
             
             # Info button
-            with st.expander(f"ℹ️ How to Play"):
+            with st.expander(f"How to Play"):
                 st.markdown(f"**Gameplay:** {game_data['gameplay']}")
                 
                 if "modes" in game_data:
@@ -243,7 +243,7 @@ def render_game_arcade(subject: str, subject_color: str):
                     st.markdown("**Game Mechanics:**")
                     for mechanic, enabled in game_data["mechanics"].items():
                         if enabled:
-                            st.markdown(f"✓ {mechanic.replace('_', ' ').title()}")
+                            st.markdown(f"- {mechanic.replace('_', ' ').title()}")
 
 
 def render_game_selector_compact(subject: str, subject_color: str):
@@ -310,7 +310,7 @@ def render_game_selector_compact(subject: str, subject_color: str):
     """, unsafe_allow_html=True)
     
     st.markdown('<div class="compact-game-selector">', unsafe_allow_html=True)
-    st.markdown(f'<div class="selector-title">🎮 Choose Your Game</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="selector-title">Choose Your Game</div>', unsafe_allow_html=True)
     
     # Show 3-4 most relevant games
     game_list = list(games.items())[:4]
@@ -334,6 +334,6 @@ def render_game_selector_compact(subject: str, subject_color: str):
     st.markdown('</div>', unsafe_allow_html=True)
     
     # View all games button
-    if st.button("📚 VIEW ALL GAMES", use_container_width=True):
+    if st.button("VIEW ALL GAMES", use_container_width=True):
         st.session_state.view = "game_arcade"
         st.rerun()

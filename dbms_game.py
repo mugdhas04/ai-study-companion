@@ -174,7 +174,7 @@ def render_game_header():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        if st.button("← BACK TO HUB", key="back_hub"):
+        if st.button("< BACK TO HUB", key="back_hub"):
             st.session_state.current_game = None
             st.session_state.current_level = None
             st.rerun()
@@ -251,7 +251,7 @@ def render_learning_path():
             if i < len(LEVELS) - 1:
                 st.markdown(f"""
                     <div style="text-align: center; color: {GAME_COLOR_1}44; font-size: 1.5rem;">
-                        │<br>│
+                        |<br>|
                     </div>
                 """, unsafe_allow_html=True)
 
@@ -261,7 +261,7 @@ def render_level_content(level_id):
     level = LEVELS[level_id - 1]
     is_boss = level.get("is_boss", False)
     
-    if st.button("← Back to Path", key="back_path"):
+    if st.button("< Back to Path", key="back_path"):
         st.session_state.current_level = None
         st.session_state.show_quiz = False
         st.session_state.explanation_result = None
@@ -306,7 +306,7 @@ def render_regular_level(level):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("📚 LEARN CONCEPT", use_container_width=True, type="primary"):
+        if st.button("LEARN CONCEPT", use_container_width=True, type="primary"):
             with st.spinner("Generating explanation..."):
                 explanation = explain_topic(level["topic"], difficulty)
                 st.session_state.explanation_result = explanation
@@ -317,7 +317,7 @@ def render_regular_level(level):
                 st.session_state.current_topic = level["topic"]
     
     with col2:
-        if st.button("📝 QUIZ", use_container_width=True):
+        if st.button("QUIZ", use_container_width=True):
             with st.spinner("Generating quiz..."):
                 quiz = generate_quiz(level["topic"], difficulty)
                 st.session_state.current_quiz = quiz
@@ -332,7 +332,7 @@ def render_regular_level(level):
     with col3:
         # Show the level-specific game button
         game_name = game_info['name'] if game_info else "PLAY GAME"
-        game_icon = game_info['icon'] if game_info else "🎮"
+        game_icon = game_info['icon'] if game_info else ""
         if st.button(f"{game_icon} {game_name.upper()}", use_container_width=True, type="secondary"):
             if level_game:
                 st.session_state.selected_mini_game = level_game
@@ -540,13 +540,13 @@ def render_quiz(level):
         
         with col1:
             if current_idx > 0:
-                if st.button("← Previous"):
+                if st.button("< Previous"):
                     st.session_state.quiz_index -= 1
                     st.rerun()
         
         with col2:
             if current_idx < len(quiz) - 1:
-                if st.button("Next →"):
+                if st.button("Next >"):
                     st.session_state.quiz_index += 1
                     st.rerun()
         
@@ -574,9 +574,9 @@ def show_quiz_results(quiz, level):
         
         if is_correct:
             correct_count += 1
-            st.markdown(f'<div class="result-correct">Q{i+1}: ✓ Correct!</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-correct">Q{i+1}: [OK] Correct!</div>', unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="result-wrong">Q{i+1}: ✗ Wrong (Answer: {correct})</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-wrong">Q{i+1}: [X] Wrong (Answer: {correct})</div>', unsafe_allow_html=True)
         
         record_answer(is_correct, is_boss_battle=False, game_id=GAME_ID)
     
@@ -609,7 +609,7 @@ def render_boss_battle(level):
     """Render the boss battle interface."""
     st.markdown(f'''
         <div class="boss-container">
-            <div class="boss-title">🧙 BOSS BATTLE 🧙</div>
+            <div class="boss-title">BOSS BATTLE</div>
             <div class="boss-subtitle">Defeat the Database Wizard!</div>
             <div style="font-family: 'Orbitron', sans-serif; color: #ffd700; font-size: 1.2rem;">Reward: +50 XP</div>
         </div>
@@ -652,9 +652,9 @@ def render_boss_battle(level):
                 if is_correct:
                     complete_level(GAME_ID, level["id"])
                     st.balloons()
-                    st.success("🎉 BOSS DEFEATED! +50 XP")
+                    st.success("BOSS DEFEATED! +50 XP")
                 else:
-                    st.error(f"💀 DEFEATED! The answer was: {correct}")
+                    st.error(f"DEFEATED! The answer was: {correct}")
                 
                 if "explanation" in boss_q:
                     st.info(f"Explanation: {boss_q['explanation']}")

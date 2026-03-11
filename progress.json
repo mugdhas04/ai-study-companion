@@ -1,0 +1,24 @@
+{
+  "xp": 0,
+  "level": 1,
+  "badges": [],
+  "questions_attempted": 0,
+  "correct_answers": 0,
+  "boss_battles_won": 0,
+  "current_streak": 0,
+  "best_streak": 0,
+  "games": {
+    "dsa": {
+      "completed_levels": 0,
+      "levels_completed": []
+    },
+    "dbms": {
+      "completed_levels": 0,
+      "levels_completed": []
+    },
+    "maths": {
+      "completed_levels": 0,
+      "levels_completed": []
+    }
+  }
+}

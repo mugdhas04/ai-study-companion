@@ -104,9 +104,9 @@ def calculate_level(xp):
     Calculate level based on XP.
     
     Level progression:
-    - 0-99 XP → Level 1
-    - 100-199 XP → Level 2
-    - 200-299 XP → Level 3
+    - 0-99 XP = Level 1
+    - 100-199 XP = Level 2
+    - 200-299 XP = Level 3
     - etc.
     
     Args:

@@ -3,7 +3,18 @@
 
 class GameAPI {
     constructor() {
-        this.API_BASE_URL = 'http://localhost:8000';
+        // Check URL params first, then use environment detection
+        const urlParams = new URLSearchParams(window.location.search);
+        const apiUrl = urlParams.get('api_url');
+        
+        if (apiUrl) {
+            this.API_BASE_URL = apiUrl;
+        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            this.API_BASE_URL = 'http://localhost:8000';
+        } else {
+            // For production, API server should be on same domain or configured
+            this.API_BASE_URL = window.API_BASE_URL || 'http://localhost:8000';
+        }
     }
 
     /**
