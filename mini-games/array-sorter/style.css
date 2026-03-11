@@ -1,0 +1,328 @@
+/* Array Sorter Game Styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+#gameContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2d1a4a, #1a1a2e);
+    border: 2px solid #9b59b6;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+}
+
+.header-left h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #9b59b6;
+    margin-bottom: 5px;
+}
+
+.game-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-box {
+    text-align: center;
+    background: rgba(155, 89, 182, 0.1);
+    border: 1px solid #9b59b644;
+    border-radius: 8px;
+    padding: 8px 15px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    color: #9b59b6;
+    font-weight: 700;
+}
+
+/* Mission Panel */
+.mission-panel {
+    background: linear-gradient(135deg, #1e1e30, #2a2a45);
+    border-left: 4px solid #9b59b6;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.mission-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #9b59b6;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.mission-panel p {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.difficulty-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #9b59b6, #e74c3c);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Array Container */
+.array-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 40px 20px;
+    min-height: 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.array-element {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    border: 3px solid #9b59b6;
+    border-radius: 15px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+}
+
+.array-element:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.6);
+}
+
+.array-element.selected {
+    border-color: #ffd700;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    transform: translateY(-10px) scale(1.1);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.8);
+}
+
+.array-element.correct {
+    border-color: #2ecc71;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    animation: correctPulse 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* Controls Panel */
+.controls-panel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 12px 30px;
+    border: 2px solid #9b59b6;
+    background: linear-gradient(135deg, #2d1a4a, #1a1a2e);
+    color: #9b59b6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(155, 89, 182, 0.5);
+}
+
+.control-btn.primary {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: #fff;
+    box-shadow: 0 3px 15px rgba(155, 89, 182, 0.4);
+}
+
+.control-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(155, 89, 182, 0.7);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Result Panel */
+.result-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.result-panel.hidden {
+    display: none;
+}
+
+.result-content {
+    background: linear-gradient(135deg, #1e1e30, #2a2a45);
+    border: 3px solid #9b59b6;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    animation: scaleIn 0.5s ease;
+}
+
+.result-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.result-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #9b59b6;
+    margin-bottom: 30px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.result-stat {
+    text-align: center;
+}
+
+.result-value {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #9b59b6;
+    font-weight: 900;
+}
+
+.result-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.continue-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.7);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-right {
+        justify-content: center;
+    }
+    
+    .array-element {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .controls-panel {
+        flex-direction: column;
+    }
+}

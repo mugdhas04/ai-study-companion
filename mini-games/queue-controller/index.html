@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Traffic Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Mission Panel -->
+        <div id="missionPanel" class="mission-panel">
+            <div class="mission-header">
+                <span class="mission-icon">🚗</span>
+                <h1>QUEUE TRAFFIC CONTROLLER</h1>
+            </div>
+            <div class="mission-content">
+                <h2 id="missionTitle">Control the Traffic Queue</h2>
+                <p id="missionText">Release cars in FIFO order. Breaking the order causes a system crash!</p>
+                
+                <div class="mission-objectives">
+                    <h3>Objectives:</h3>
+                    <ul id="objectivesList">
+                        <li>Release cars in correct FIFO order</li>
+                        <li>Don't let the queue overflow</li>
+                        <li>Maintain traffic flow</li>
+                    </ul>
+                </div>
+                
+                <div class="mission-stats">
+                    <div class="stat">
+                        <span class="stat-label">Queue Size</span>
+                        <span id="queueSizeDisplay" class="stat-value">5</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Cars to Process</span>
+                        <span id="carsCountDisplay" class="stat-value">10</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Speed</span>
+                        <span id="speedDisplay" class="stat-value">Normal</span>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="start-btn">START MISSION</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="gameArea" class="game-area hidden">
+            <div class="game-header">
+                <div class="level-info">
+                    <span class="label">Level</span>
+                    <span id="levelDisplay" class="value">1</span>
+                </div>
+                <div class="score-info">
+                    <span class="label">Score</span>
+                    <span id="scoreDisplay" class="value">0</span>
+                </div>
+                <div class="lives-info">
+                    <span class="label">Lives</span>
+                    <span id="livesDisplay" class="value">❤️❤️❤️</span>
+                </div>
+                <div class="timer-info">
+                    <span class="label">Time</span>
+                    <span id="timerDisplay" class="value">--</span>
+                </div>
+            </div>
+
+            <!-- Incoming Cars -->
+            <div class="incoming-section">
+                <h3>🚗 Incoming Cars</h3>
+                <div id="incomingLane" class="incoming-lane"></div>
+            </div>
+
+            <!-- Queue Visualization -->
+            <div class="queue-section">
+                <h3>📥 Queue (FIFO) - Front → Rear</h3>
+                <div id="queueVisual" class="queue-visual">
+                    <div class="queue-container">
+                        <span class="queue-label">FRONT</span>
+                        <div id="queueSlots" class="queue-slots"></div>
+                        <span class="queue-label">REAR</span>
+                    </div>
+                </div>
+                <div class="queue-info">
+                    <span>Size: <span id="currentSize">0</span>/<span id="maxSize">5</span></span>
+                </div>
+            </div>
+
+            <!-- Exit Lane -->
+            <div class="exit-section">
+                <h3>🏁 Exit Lane - Click to Release!</h3>
+                <div id="exitLane" class="exit-lane">
+                    <div id="exitCar" class="exit-car hidden"></div>
+                    <button id="releaseBtn" class="release-btn" disabled>RELEASE FRONT CAR</button>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="enqueueBtn" class="control-btn enqueue">📥 ENQUEUE</button>
+                <button id="dequeueBtn" class="control-btn dequeue">📤 DEQUEUE</button>
+                <button id="peekBtn" class="control-btn peek">👀 PEEK</button>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="statusMessage" class="status-message hidden"></div>
+        </div>
+
+        <!-- Result Panel -->
+        <div id="resultPanel" class="result-panel hidden">
+            <div id="resultIcon" class="result-icon">🎉</div>
+            <h2 id="resultTitle">Traffic Controlled!</h2>
+            <p id="resultText">All cars processed successfully!</p>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="label">Cars Processed</span>
+                    <span id="resultCars" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">Score</span>
+                    <span id="resultScore" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">XP Earned</span>
+                    <span id="resultXP" class="value">+0</span>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="continueBtn" class="action-btn primary">Next Level →</button>
+                <button id="retryBtn" class="action-btn">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

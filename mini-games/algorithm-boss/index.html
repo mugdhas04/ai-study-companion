@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Arena - Boss Battle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Mission Panel -->
+        <div id="missionPanel" class="mission-panel">
+            <div class="mission-header">
+                <span class="mission-icon">⚔️</span>
+                <h1>ALGORITHM ARENA</h1>
+                <span class="boss-badge">BOSS BATTLE</span>
+            </div>
+            <div class="mission-content">
+                <h2 id="missionTitle">System Design Challenge</h2>
+                <p id="missionText">Design a system handling 1M+ operations per second. Choose the optimal data structures!</p>
+                
+                <div class="mission-objectives">
+                    <h3>Battle Phases:</h3>
+                    <ul id="objectivesList">
+                        <li>Phase 1: Theory - Answer complexity questions</li>
+                        <li>Phase 2: Design - Choose best structures</li>
+                        <li>Phase 3: Optimization - Meet performance goals</li>
+                    </ul>
+                </div>
+                
+                <div class="boss-stats">
+                    <div class="boss-info">
+                        <span class="boss-name">🤖 THE OPTIMIZER</span>
+                        <div class="boss-hp">
+                            <span>HP:</span>
+                            <div class="hp-bar"><div class="hp-fill" style="width: 100%"></div></div>
+                            <span id="bossHPText">1000/1000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="start-btn">⚔️ BEGIN BATTLE</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="gameArea" class="game-area hidden">
+            <div class="game-header">
+                <div class="phase-info">
+                    <span class="label">Phase</span>
+                    <span id="phaseDisplay" class="value">1/3</span>
+                </div>
+                <div class="score-info">
+                    <span class="label">Damage</span>
+                    <span id="damageDisplay" class="value">0</span>
+                </div>
+                <div class="combo-info">
+                    <span class="label">Combo</span>
+                    <span id="comboDisplay" class="value">x1</span>
+                </div>
+                <div class="timer-info">
+                    <span class="label">Time</span>
+                    <span id="timerDisplay" class="value">60</span>
+                </div>
+            </div>
+
+            <!-- Boss Display -->
+            <div class="boss-display">
+                <div class="boss-avatar">🤖</div>
+                <div class="boss-status">
+                    <span id="bossName">THE OPTIMIZER</span>
+                    <div class="boss-hp-bar">
+                        <div id="bossHPFill" class="hp-fill" style="width: 100%"></div>
+                    </div>
+                    <span id="bossHP">1000/1000</span>
+                </div>
+                <div id="bossDialog" class="boss-dialog">
+                    "Your algorithms are too slow! Can you optimize them?"
+                </div>
+            </div>
+
+            <!-- Challenge Area -->
+            <div id="challengeArea" class="challenge-area">
+                <div id="questionCard" class="question-card">
+                    <div class="question-header">
+                        <span id="questionType" class="question-type">THEORY</span>
+                        <span id="questionPoints" class="question-points">+100 DMG</span>
+                    </div>
+                    <p id="questionText" class="question-text">Loading question...</p>
+                    <div id="answerOptions" class="answer-options"></div>
+                </div>
+            </div>
+
+            <!-- Player Stats -->
+            <div class="player-stats">
+                <div class="player-hp">
+                    <span>Your HP:</span>
+                    <div class="hp-bar player"><div id="playerHPFill" class="hp-fill" style="width: 100%"></div></div>
+                    <span id="playerHP">100/100</span>
+                </div>
+            </div>
+
+            <!-- Combat Log -->
+            <div id="combatLog" class="combat-log">
+                <div class="log-entry">Battle started!</div>
+            </div>
+        </div>
+
+        <!-- Victory Panel -->
+        <div id="resultPanel" class="result-panel hidden">
+            <div id="resultIcon" class="result-icon">🏆</div>
+            <h2 id="resultTitle">VICTORY!</h2>
+            <p id="resultText">You defeated The Optimizer!</p>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="label">Total Damage</span>
+                    <span id="resultDamage" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">Max Combo</span>
+                    <span id="resultCombo" class="value">x1</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">XP Earned</span>
+                    <span id="resultXP" class="value">+500</span>
+                </div>
+            </div>
+            
+            <div class="loot-section">
+                <h3>🎁 Loot Obtained:</h3>
+                <div id="lootItems" class="loot-items"></div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="continueBtn" class="action-btn primary">Claim Rewards</button>
+                <button id="retryBtn" class="action-btn">Fight Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🏗️ Schema Builder</h1>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Schemas Built</span>
+                    <span class="stat-value" id="schemas-built">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="challenge-panel">
+                <h2 id="challenge-title">Build the Schema</h2>
+                <p id="challenge-description">Create an ER diagram for the given scenario</p>
+            </div>
+
+            <div class="workspace">
+                <div class="toolbox">
+                    <h3>🧰 Toolbox</h3>
+                    <button class="tool-btn" data-type="entity">📦 Entity</button>
+                    <button class="tool-btn" data-type="attribute">🏷️ Attribute</button>
+                    <button class="tool-btn" data-type="primary-key">🔑 Primary Key</button>
+                    <button class="tool-btn" data-type="foreign-key">🔗 Foreign Key</button>
+                    <button class="tool-btn" data-type="relationship">↔️ Relationship</button>
+                </div>
+
+                <div class="canvas-container">
+                    <div class="canvas" id="canvas">
+                        <svg class="connections" id="connections"></svg>
+                        <!-- Entities will be added here -->
+                    </div>
+                </div>
+
+                <div class="properties-panel" id="properties-panel">
+                    <h3>⚙️ Properties</h3>
+                    <div id="properties-content">
+                        <p class="placeholder">Select an element to edit</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="check-btn" class="btn btn-primary">✓ Check Schema</button>
+                <button id="hint-btn" class="btn btn-secondary">💡 Hint</button>
+                <button id="clear-btn" class="btn btn-danger">🗑️ Clear All</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </main>
+
+        <div class="modal" id="success-modal">
+            <div class="modal-content">
+                <h2>🎉 Schema Complete!</h2>
+                <p id="modal-message">Great database design!</p>
+                <div class="modal-stats">
+                    <span class="stat-value" id="xp-earned">+100 XP</span>
+                </div>
+                <button id="next-btn" class="btn btn-primary">Next Challenge →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

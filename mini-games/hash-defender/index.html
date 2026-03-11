@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Defender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Mission Panel -->
+        <div id="missionPanel" class="mission-panel">
+            <div class="mission-header">
+                <span class="mission-icon">🛡️</span>
+                <h1>HASH DEFENDER</h1>
+            </div>
+            <div class="mission-content">
+                <h2 id="missionTitle">Defend the Hash Table</h2>
+                <p id="missionText">Insert keys into the correct hash table slots. Handle collisions wisely!</p>
+                
+                <div class="mission-objectives">
+                    <h3>Objectives:</h3>
+                    <ul id="objectivesList">
+                        <li>Insert all keys correctly</li>
+                        <li>Handle collisions using the specified method</li>
+                        <li>Minimize total probes</li>
+                    </ul>
+                </div>
+                
+                <div class="mission-stats">
+                    <div class="stat">
+                        <span class="stat-label">Table Size</span>
+                        <span id="tableSizeDisplay" class="stat-value">7</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Keys to Insert</span>
+                        <span id="keysCountDisplay" class="stat-value">5</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Collision Method</span>
+                        <span id="methodDisplay" class="stat-value">Linear</span>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="start-btn">START MISSION</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="gameArea" class="game-area hidden">
+            <div class="game-header">
+                <div class="level-info">
+                    <span class="label">Level</span>
+                    <span id="levelDisplay" class="value">1</span>
+                </div>
+                <div class="score-info">
+                    <span class="label">Score</span>
+                    <span id="scoreDisplay" class="value">0</span>
+                </div>
+                <div class="probes-info">
+                    <span class="label">Probes</span>
+                    <span id="probesDisplay" class="value">0</span>
+                </div>
+            </div>
+
+            <!-- Keys Queue -->
+            <div class="keys-section">
+                <h3>Keys to Insert:</h3>
+                <div id="keysQueue" class="keys-queue"></div>
+                <div class="current-key-info">
+                    <span>Current Key: </span>
+                    <span id="currentKey" class="current-key">-</span>
+                    <span> → Hash: </span>
+                    <span id="hashValue" class="hash-value">-</span>
+                </div>
+            </div>
+
+            <!-- Hash Table -->
+            <div class="hash-table-section">
+                <h3>Hash Table (h(k) = k mod <span id="modValue">7</span>)</h3>
+                <div id="hashTable" class="hash-table"></div>
+            </div>
+
+            <!-- Collision Info -->
+            <div id="collisionInfo" class="collision-info hidden">
+                <span class="collision-icon">⚠️</span>
+                <span id="collisionText">Collision detected! Use probing to find next slot.</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="undoBtn" class="control-btn">↩️ Undo</button>
+                <button id="hintBtn" class="control-btn">💡 Hint</button>
+                <button id="resetBtn" class="control-btn">🔄 Reset</button>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div id="resultPanel" class="result-panel hidden">
+            <div id="resultIcon" class="result-icon">🎉</div>
+            <h2 id="resultTitle">Hash Table Complete!</h2>
+            <p id="resultText">All keys inserted successfully!</p>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="label">Total Probes</span>
+                    <span id="resultProbes" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">Score</span>
+                    <span id="resultScore" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">XP Earned</span>
+                    <span id="resultXP" class="value">+0</span>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="continueBtn" class="action-btn primary">Next Level →</button>
+                <button id="retryBtn" class="action-btn">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a1a0a 0%, #1a3a1a 50%, #0d2e1a 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stats {
+            display: flex; justify-content: center; gap: 35px;
+            background: rgba(0, 255, 136, 0.1); padding: 12px 30px;
+            border-radius: 12px; border: 1px solid rgba(0, 255, 136, 0.3); margin-top: 15px;
+        }
+        .stat { text-align: center; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #00ff88; }
+
+        .challenge {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 15px;
+            padding: 20px; margin-bottom: 25px; text-align: center;
+        }
+        .challenge h2 { font-family: 'Orbitron', sans-serif; color: #00d4ff; font-size: 1.1rem; margin-bottom: 10px; }
+        .operation { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #ffd93d; }
+
+        .matrices-area {
+            display: flex; justify-content: center; align-items: center;
+            gap: 30px; flex-wrap: wrap; margin-bottom: 25px;
+        }
+        .matrix-box {
+            background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        .matrix-box h4 { 
+            font-family: 'Orbitron', sans-serif; color: #7c3aed; 
+            font-size: 0.9rem; text-align: center; margin-bottom: 15px; 
+        }
+        .matrix {
+            display: grid; gap: 8px;
+        }
+        .matrix-cell {
+            width: 50px; height: 50px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: #fff;
+        }
+        .matrix-cell.input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+        }
+        .matrix-cell input {
+            width: 100%; height: 100%;
+            background: transparent; border: none;
+            text-align: center; color: #00ff88;
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem;
+        }
+        .matrix-cell input:focus { outline: none; }
+
+        .operator {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem; color: #ffd93d;
+        }
+
+        .buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .btn {
+            padding: 12px 30px; border: none; border-radius: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s; text-transform: uppercase;
+        }
+        .btn-primary { background: linear-gradient(135deg, #00ff88, #00d4ff); color: #0a0a1a; font-weight: 700; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5); }
+        .btn-secondary { background: rgba(255, 217, 61, 0.2); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.4); }
+
+        .feedback {
+            text-align: center; padding: 15px; border-radius: 10px;
+            font-family: 'Orbitron', sans-serif; display: none;
+        }
+        .feedback.success { display: block; background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+        .feedback.error { display: block; background: rgba(255, 100, 100, 0.2); color: #ff6b6b; }
+        .feedback.hint { display: block; background: rgba(255, 217, 61, 0.2); color: #ffd93d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔢 Matrix Master</h1>
+            <div class="stats">
+                <div class="stat"><span class="stat-label">Score</span><div class="stat-value" id="score">0</div></div>
+                <div class="stat"><span class="stat-label">Level</span><div class="stat-value" id="level">1</div></div>
+                <div class="stat"><span class="stat-label">Solved</span><div class="stat-value" id="solved">0</div></div>
+            </div>
+        </header>
+
+        <div class="challenge">
+            <h2 id="challenge-title">Matrix Addition</h2>
+            <div class="operation" id="operation">A + B = ?</div>
+        </div>
+
+        <div class="matrices-area" id="matrices-area"></div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" id="check-btn">✓ Check Answer</button>
+            <button class="btn btn-secondary" id="hint-btn">💡 Hint</button>
+            <button class="btn btn-secondary" id="skip-btn">⏭ Skip</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        class MatrixMaster {
+            constructor() {
+                this.score = 0;
+                this.level = 1;
+                this.solved = 0;
+                this.currentProblem = null;
+                this.problems = this.generateProblems();
+                this.problemIndex = 0;
+                
+                this.bindEvents();
+                this.loadProblem();
+            }
+
+            generateProblems() {
+                return [
+                    // Level 1: 2x2 Addition
+                    {
+                        type: 'addition',
+                        title: 'Matrix Addition',
+                        a: [[1, 2], [3, 4]],
+                        b: [[5, 6], [7, 8]],
+                        answer: [[6, 8], [10, 12]],
+                        hint: 'Add corresponding elements: A[i][j] + B[i][j]',
+                        xp: 50
+                    },
+                    // Level 2: 2x2 Subtraction
+                    {
+                        type: 'subtraction',
+                        title: 'Matrix Subtraction',
+                        a: [[8, 6], [4, 2]],
+                        b: [[3, 2], [1, 1]],
+                        answer: [[5, 4], [3, 1]],
+                        hint: 'Subtract corresponding elements: A[i][j] - B[i][j]',
+                        xp: 50
+                    },
+                    // Level 3: Scalar Multiplication
+                    {
+                        type: 'scalar',
+                        title: 'Scalar Multiplication',
+                        scalar: 3,
+                        a: [[1, 2], [3, 4]],
+                        answer: [[3, 6], [9, 12]],
+                        hint: 'Multiply each element by the scalar',
+                        xp: 75
+                    },
+                    // Level 4: 2x2 Matrix Multiplication
+                    {
+                        type: 'multiplication',
+                        title: 'Matrix Multiplication',
+                        a: [[1, 2], [3, 4]],
+                        b: [[2, 0], [1, 2]],
+                        answer: [[4, 4], [10, 8]],
+                        hint: 'Row × Column: C[i][j] = sum of A[i][k] × B[k][j]',
+                        xp: 100
+                    },
+                    // Level 5: 3x3 Addition
+                    {
+                        type: 'addition',
+                        title: 'Matrix Addition (3×3)',
+                        a: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                        b: [[9, 8, 7], [6, 5, 4], [3, 2, 1]],
+                        answer: [[10, 10, 10], [10, 10, 10], [10, 10, 10]],
+                        hint: 'Same rule applies: add corresponding elements',
+                        xp: 100
+                    },
+                    // Level 6: Determinant
+                    {
+                        type: 'determinant',
+                        title: 'Find the Determinant',
+                        a: [[4, 3], [2, 1]],
+                        answer: -2,
+                        hint: 'For 2×2: det = ad - bc',
+                        xp: 125
+                    }
+                ];
+            }
+
+            bindEvents() {
+                document.getElementById('check-btn').onclick = () => this.checkAnswer();
+                document.getElementById('hint-btn').onclick = () => this.showHint();
+                document.getElementById('skip-btn').onclick = () => this.nextProblem();
+            }
+
+            loadProblem() {
+                if (this.problemIndex >= this.problems.length) {
+                    this.problemIndex = 0;
+                    this.level++;
+                }
+
+                this.currentProblem = this.problems[this.problemIndex];
+                const p = this.currentProblem;
+                
+                document.getElementById('challenge-title').textContent = p.title;
+                
+                let opText = '';
+                if (p.type === 'addition') opText = 'A + B = ?';
+                else if (p.type === 'subtraction') opText = 'A - B = ?';
+                else if (p.type === 'scalar') opText = `${p.scalar} × A = ?`;
+                else if (p.type === 'multiplication') opText = 'A × B = ?';
+                else if (p.type === 'determinant') opText = 'det(A) = ?';
+                document.getElementById('operation').textContent = opText;
+
+                this.renderMatrices();
+                this.hideFeedback();
+                this.updateStats();
+            }
+
+            renderMatrices() {
+                const area = document.getElementById('matrices-area');
+                const p = this.currentProblem;
+                let html = '';
+
+                // Matrix A
+                html += this.renderMatrix('A', p.a, false);
+
+                // Operator
+                if (p.type !== 'scalar' && p.type !== 'determinant') {
+                    html += `<span class="operator">${p.type === 'addition' ? '+' : p.type === 'subtraction' ? '−' : '×'}</span>`;
+                    html += this.renderMatrix('B', p.b, false);
+                } else if (p.type === 'scalar') {
+                    // Already shown in operation text
+                }
+
+                // Equals and Result
+                html += '<span class="operator">=</span>';
+                
+                if (p.type === 'determinant') {
+                    html += `
+                        <div class="matrix-box">
+                            <h4>Result</h4>
+                            <div class="matrix-cell input">
+                                <input type="number" id="det-answer" placeholder="?">
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const rows = p.answer.length;
+                    const cols = p.answer[0].length;
+                    html += this.renderMatrix('Result', Array(rows).fill().map(() => Array(cols).fill('')), true);
+                }
+
+                area.innerHTML = html;
+            }
+
+            renderMatrix(label, matrix, isInput) {
+                const rows = matrix.length;
+                const cols = matrix[0].length;
+                
+                let html = `<div class="matrix-box"><h4>${label}</h4>`;
+                html += `<div class="matrix" style="grid-template-columns: repeat(${cols}, 1fr);">`;
+                
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        if (isInput) {
+                            html += `<div class="matrix-cell input"><input type="number" data-row="${i}" data-col="${j}" placeholder="?"></div>`;
+                        } else {
+                            html += `<div class="matrix-cell">${matrix[i][j]}</div>`;
+                        }
+                    }
+                }
+                
+                html += '</div></div>';
+                return html;
+            }
+
+            checkAnswer() {
+                const p = this.currentProblem;
+                let correct = false;
+
+                if (p.type === 'determinant') {
+                    const userAnswer = parseInt(document.getElementById('det-answer').value);
+                    correct = userAnswer === p.answer;
+                } else {
+                    const inputs = document.querySelectorAll('.matrix-cell.input input');
+                    const userMatrix = [];
+                    const rows = p.answer.length;
+                    const cols = p.answer[0].length;
+                    
+                    for (let i = 0; i < rows; i++) {
+                        userMatrix[i] = [];
+                        for (let j = 0; j < cols; j++) {
+                            const idx = i * cols + j;
+                            userMatrix[i][j] = parseInt(inputs[idx].value) || 0;
+                        }
+                    }
+
+                    correct = JSON.stringify(userMatrix) === JSON.stringify(p.answer);
+                }
+
+                if (correct) {
+                    this.score += p.xp;
+                    this.solved++;
+                    this.showFeedback(`✓ Correct! +${p.xp} XP`, 'success');
+                    this.reportScore();
+                    
+                    setTimeout(() => {
+                        this.problemIndex++;
+                        this.loadProblem();
+                    }, 1500);
+                } else {
+                    this.showFeedback('✗ Not quite right. Try again!', 'error');
+                }
+                
+                this.updateStats();
+            }
+
+            showHint() {
+                this.showFeedback(`💡 ${this.currentProblem.hint}`, 'hint');
+            }
+
+            nextProblem() {
+                this.problemIndex++;
+                this.loadProblem();
+            }
+
+            showFeedback(msg, type) {
+                const fb = document.getElementById('feedback');
+                fb.textContent = msg;
+                fb.className = `feedback ${type}`;
+            }
+
+            hideFeedback() {
+                document.getElementById('feedback').className = 'feedback';
+            }
+
+            updateStats() {
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('level').textContent = this.level;
+                document.getElementById('solved').textContent = this.solved;
+            }
+
+            reportScore() {
+                if (window.parent !== window) {
+                    window.parent.postMessage({ type: 'GAME_SCORE', game: 'matrix-master', score: this.score }, '*');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => new MatrixMaster());
+    </script>
+</body>
+</html>

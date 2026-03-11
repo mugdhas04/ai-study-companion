@@ -1,0 +1,357 @@
+/* Tree Builder Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a1628 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border-radius: 15px;
+    border: 2px solid #2ecc71;
+    margin-bottom: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-icon {
+    font-size: 2.5rem;
+}
+
+.game-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2ecc71;
+    letter-spacing: 2px;
+}
+
+.header-right {
+    display: flex;
+    gap: 30px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2ecc71;
+}
+
+/* Panels */
+.panel {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Mission Panel */
+.mission-panel {
+    margin-bottom: 20px;
+}
+
+.mission-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.mission-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #2ecc71;
+    margin-bottom: 15px;
+}
+
+.mission-panel p {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.mission-nodes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.mission-node {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Game Area */
+.game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tree-container {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #2ecc71;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+#treeCanvas {
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Current Node Panel */
+.current-node-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border-radius: 15px;
+    border: 2px solid #444;
+}
+
+.current-node-panel .label {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.current-node {
+    background: linear-gradient(135deg, #f39c12, #e74c3c);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(243, 156, 18, 0.5);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Controls */
+.controls-panel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons */
+.btn {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+    box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+}
+
+.btn-hint {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: #fff;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Traversal Panel */
+.traversal-panel {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.traversal-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.traversal-label {
+    color: #888;
+    font-size: 1rem;
+}
+
+.traversal-value {
+    font-family: 'Orbitron', sans-serif;
+    color: #2ecc71;
+    font-size: 1.1rem;
+}
+
+/* Result Panel */
+.result-panel {
+    padding: 50px;
+}
+
+.result-icon {
+    font-size: 6rem;
+    margin-bottom: 20px;
+}
+
+.result-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+.result-panel p {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.result-stat {
+    text-align: center;
+}
+
+.result-stat .stat-value {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Tree Node Styling (Canvas drawn) */
+.tree-node {
+    position: absolute;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tree-node.selected {
+    background: linear-gradient(135deg, #f39c12, #e74c3c);
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .mission-panel h2 {
+        font-size: 1.5rem;
+    }
+    
+    .controls-panel {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}

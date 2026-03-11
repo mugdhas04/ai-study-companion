@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Gates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a1a2e 0%, #1a2a4e 50%, #0d1e40 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container { max-width: 850px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stats {
+            display: flex; justify-content: center; gap: 35px;
+            background: rgba(0, 212, 255, 0.1); padding: 12px 30px;
+            border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3); margin-top: 15px;
+        }
+        .stat { text-align: center; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #00d4ff; }
+
+        .challenge {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 15px;
+            padding: 20px; margin-bottom: 25px; text-align: center;
+        }
+        .challenge h2 { font-family: 'Orbitron', sans-serif; color: #7c3aed; font-size: 1.1rem; margin-bottom: 10px; }
+        .expression { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #00d4ff; margin: 10px 0; }
+
+        .circuit {
+            display: flex; justify-content: center; align-items: center;
+            gap: 20px; margin-bottom: 25px; flex-wrap: wrap;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 15px; }
+        .input-toggle {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(0, 0, 0, 0.3); padding: 10px 20px;
+            border-radius: 10px;
+        }
+        .input-label { font-family: 'Orbitron', sans-serif; color: #7c3aed; width: 30px; }
+        .toggle {
+            width: 60px; height: 30px;
+            background: rgba(255, 100, 100, 0.3);
+            border-radius: 15px; cursor: pointer;
+            position: relative; transition: all 0.3s;
+            border: 2px solid rgba(255, 100, 100, 0.5);
+        }
+        .toggle.on { background: rgba(0, 255, 136, 0.3); border-color: rgba(0, 255, 136, 0.5); }
+        .toggle::after {
+            content: ''; position: absolute;
+            width: 22px; height: 22px; border-radius: 50%;
+            top: 2px; left: 3px;
+            background: #ff6b6b;
+            transition: all 0.3s;
+        }
+        .toggle.on::after { left: 33px; background: #00ff88; }
+        .toggle-value {
+            font-family: 'Orbitron', sans-serif; font-size: 1.2rem;
+            width: 20px; text-align: center;
+        }
+
+        .gate-box {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(0, 212, 255, 0.2));
+            border: 2px solid rgba(124, 58, 237, 0.5);
+            border-radius: 15px; padding: 25px 35px;
+            text-align: center;
+        }
+        .gate-name { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #ffd93d; }
+        .gate-symbol { font-size: 2.5rem; margin: 10px 0; }
+
+        .output-box {
+            background: rgba(0, 0, 0, 0.4); border-radius: 15px;
+            padding: 20px 30px; text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        .output-label { font-family: 'Orbitron', sans-serif; color: #888; font-size: 0.9rem; }
+        .output-value {
+            font-family: 'Orbitron', sans-serif; font-size: 2.5rem;
+            transition: all 0.3s;
+        }
+        .output-value.on { color: #00ff88; text-shadow: 0 0 20px rgba(0, 255, 136, 0.8); }
+        .output-value.off { color: #ff6b6b; text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+
+        .truth-table {
+            background: rgba(0, 0, 0, 0.3); border-radius: 12px;
+            padding: 20px; margin-bottom: 25px; overflow-x: auto;
+        }
+        .truth-table h4 { font-family: 'Orbitron', sans-serif; color: #7c3aed; margin-bottom: 15px; text-align: center; }
+        .truth-table table { width: 100%; border-collapse: collapse; }
+        .truth-table th, .truth-table td {
+            padding: 10px 15px; text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+        .truth-table th { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+        .truth-table td { color: #fff; }
+
+        .question-area { text-align: center; margin-bottom: 20px; }
+        .question { font-size: 1.2rem; margin-bottom: 15px; }
+        .answer-input {
+            display: flex; justify-content: center; gap: 15px;
+        }
+        .bit-btn {
+            width: 60px; height: 60px; border-radius: 50%;
+            font-family: 'Orbitron', sans-serif; font-size: 1.5rem;
+            cursor: pointer; transition: all 0.3s; border: 3px solid;
+        }
+        .bit-btn.zero { background: rgba(255, 100, 100, 0.2); border-color: #ff6b6b; color: #ff6b6b; }
+        .bit-btn.one { background: rgba(0, 255, 136, 0.2); border-color: #00ff88; color: #00ff88; }
+        .bit-btn:hover { transform: scale(1.1); }
+        .bit-btn.selected { transform: scale(1.15); box-shadow: 0 0 20px currentColor; }
+
+        .buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .btn {
+            padding: 12px 30px; border: none; border-radius: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s; text-transform: uppercase;
+        }
+        .btn-primary { background: linear-gradient(135deg, #00d4ff, #7c3aed); color: #fff; font-weight: 700; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5); }
+        .btn-secondary { background: rgba(255, 217, 61, 0.2); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.4); }
+
+        .feedback {
+            text-align: center; padding: 15px; border-radius: 10px;
+            font-family: 'Orbitron', sans-serif; display: none;
+        }
+        .feedback.success { display: block; background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+        .feedback.error { display: block; background: rgba(255, 100, 100, 0.2); color: #ff6b6b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>⚡ Logic Gates</h1>
+            <div class="stats">
+                <div class="stat"><span class="stat-label">Score</span><div class="stat-value" id="score">0</div></div>
+                <div class="stat"><span class="stat-label">Gate</span><div class="stat-value" id="gate-num">1</div></div>
+                <div class="stat"><span class="stat-label">Correct</span><div class="stat-value" id="correct">0</div></div>
+            </div>
+        </header>
+
+        <div class="challenge">
+            <h2 id="challenge-title">Learn the Gate</h2>
+            <div class="expression" id="expression"></div>
+        </div>
+
+        <div class="circuit" id="circuit"></div>
+        
+        <div class="truth-table" id="truth-table"></div>
+        
+        <div class="question-area" id="question-area"></div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" id="action-btn">✓ Submit</button>
+            <button class="btn btn-secondary" id="next-btn">Next Gate →</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        class LogicGates {
+            constructor() {
+                this.score = 0;
+                this.gateNum = 1;
+                this.correctCount = 0;
+                this.selectedAnswer = null;
+                this.inputA = 0;
+                this.inputB = 0;
+                this.currentGate = null;
+                
+                this.gates = [
+                    { name: 'AND', symbol: '∧', func: (a, b) => a && b, inputs: 2, xp: 50 },
+                    { name: 'OR', symbol: '∨', func: (a, b) => a || b, inputs: 2, xp: 50 },
+                    { name: 'NOT', symbol: '¬', func: (a) => !a, inputs: 1, xp: 50 },
+                    { name: 'NAND', symbol: '⊼', func: (a, b) => !(a && b), inputs: 2, xp: 75 },
+                    { name: 'NOR', symbol: '⊽', func: (a, b) => !(a || b), inputs: 2, xp: 75 },
+                    { name: 'XOR', symbol: '⊕', func: (a, b) => a !== b, inputs: 2, xp: 100 },
+                    { name: 'XNOR', symbol: '⊙', func: (a, b) => a === b, inputs: 2, xp: 100 }
+                ];
+                
+                this.gateIndex = 0;
+                this.mode = 'explore'; // explore or quiz
+                this.quizQuestion = null;
+                
+                this.bindEvents();
+                this.loadGate();
+            }
+
+            bindEvents() {
+                document.getElementById('action-btn').onclick = () => this.handleAction();
+                document.getElementById('next-btn').onclick = () => this.nextGate();
+            }
+
+            loadGate() {
+                if (this.gateIndex >= this.gates.length) {
+                    this.gateIndex = 0;
+                }
+                
+                this.currentGate = this.gates[this.gateIndex];
+                this.inputA = 0;
+                this.inputB = 0;
+                this.selectedAnswer = null;
+                this.mode = 'explore';
+                
+                document.getElementById('challenge-title').textContent = `${this.currentGate.name} Gate`;
+                document.getElementById('expression').textContent = this.getExpression();
+                
+                this.renderCircuit();
+                this.renderTruthTable();
+                this.renderQuestionArea();
+                this.hideFeedback();
+                this.updateStats();
+                
+                document.getElementById('action-btn').textContent = '🎯 Quiz Me!';
+            }
+
+            getExpression() {
+                const g = this.currentGate;
+                if (g.inputs === 1) return `${g.symbol}A = Output`;
+                return `A ${g.symbol} B = Output`;
+            }
+
+            renderCircuit() {
+                const g = this.currentGate;
+                const output = g.inputs === 1 ? 
+                    g.func(!!this.inputA) : 
+                    g.func(!!this.inputA, !!this.inputB);
+                
+                let html = '<div class="input-group">';
+                
+                html += this.renderToggle('A', this.inputA);
+                if (g.inputs === 2) {
+                    html += this.renderToggle('B', this.inputB);
+                }
+                html += '</div>';
+
+                html += `
+                    <div class="gate-box">
+                        <div class="gate-name">${g.name}</div>
+                        <div class="gate-symbol">${g.symbol}</div>
+                    </div>
+                `;
+
+                html += `
+                    <div class="output-box">
+                        <div class="output-label">OUTPUT</div>
+                        <div class="output-value ${output ? 'on' : 'off'}">${output ? '1' : '0'}</div>
+                    </div>
+                `;
+
+                document.getElementById('circuit').innerHTML = html;
+                
+                // Bind toggle events
+                document.querySelectorAll('.toggle').forEach(toggle => {
+                    toggle.onclick = () => {
+                        const input = toggle.dataset.input;
+                        if (input === 'A') this.inputA = this.inputA ? 0 : 1;
+                        else this.inputB = this.inputB ? 0 : 1;
+                        this.renderCircuit();
+                    };
+                });
+            }
+
+            renderToggle(label, value) {
+                return `
+                    <div class="input-toggle">
+                        <span class="input-label">${label}</span>
+                        <div class="toggle ${value ? 'on' : ''}" data-input="${label}"></div>
+                        <span class="toggle-value">${value}</span>
+                    </div>
+                `;
+            }
+
+            renderTruthTable() {
+                const g = this.currentGate;
+                let html = `<h4>Truth Table</h4><table>`;
+                
+                if (g.inputs === 1) {
+                    html += `<tr><th>A</th><th>${g.name}</th></tr>`;
+                    html += `<tr><td>0</td><td>${g.func(false) ? 1 : 0}</td></tr>`;
+                    html += `<tr><td>1</td><td>${g.func(true) ? 1 : 0}</td></tr>`;
+                } else {
+                    html += `<tr><th>A</th><th>B</th><th>${g.name}</th></tr>`;
+                    for (let a = 0; a <= 1; a++) {
+                        for (let b = 0; b <= 1; b++) {
+                            const result = g.func(!!a, !!b) ? 1 : 0;
+                            html += `<tr><td>${a}</td><td>${b}</td><td>${result}</td></tr>`;
+                        }
+                    }
+                }
+                
+                html += '</table>';
+                document.getElementById('truth-table').innerHTML = html;
+            }
+
+            renderQuestionArea() {
+                if (this.mode === 'explore') {
+                    document.getElementById('question-area').innerHTML = '<p>Toggle the inputs above to see how the gate works!</p>';
+                    return;
+                }
+
+                // Generate quiz question
+                const g = this.currentGate;
+                let a, b, correctAnswer;
+                
+                if (g.inputs === 1) {
+                    a = Math.random() < 0.5 ? 0 : 1;
+                    correctAnswer = g.func(!!a) ? 1 : 0;
+                    this.quizQuestion = { a, correctAnswer };
+                    
+                    document.getElementById('question-area').innerHTML = `
+                        <p class="question">What is ${g.symbol}${a} ?</p>
+                        <div class="answer-input">
+                            <button class="bit-btn zero" data-answer="0">0</button>
+                            <button class="bit-btn one" data-answer="1">1</button>
+                        </div>
+                    `;
+                } else {
+                    a = Math.random() < 0.5 ? 0 : 1;
+                    b = Math.random() < 0.5 ? 0 : 1;
+                    correctAnswer = g.func(!!a, !!b) ? 1 : 0;
+                    this.quizQuestion = { a, b, correctAnswer };
+                    
+                    document.getElementById('question-area').innerHTML = `
+                        <p class="question">What is ${a} ${g.symbol} ${b} ?</p>
+                        <div class="answer-input">
+                            <button class="bit-btn zero" data-answer="0">0</button>
+                            <button class="bit-btn one" data-answer="1">1</button>
+                        </div>
+                    `;
+                }
+
+                // Bind answer buttons
+                document.querySelectorAll('.bit-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.bit-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        this.selectedAnswer = parseInt(btn.dataset.answer);
+                    };
+                });
+            }
+
+            handleAction() {
+                if (this.mode === 'explore') {
+                    this.mode = 'quiz';
+                    this.renderQuestionArea();
+                    document.getElementById('action-btn').textContent = '✓ Submit Answer';
+                } else {
+                    this.checkAnswer();
+                }
+            }
+
+            checkAnswer() {
+                if (this.selectedAnswer === null) {
+                    this.showFeedback('Select 0 or 1!', 'error');
+                    return;
+                }
+
+                if (this.selectedAnswer === this.quizQuestion.correctAnswer) {
+                    this.score += this.currentGate.xp;
+                    this.correctCount++;
+                    this.showFeedback(`✓ Correct! +${this.currentGate.xp} XP`, 'success');
+                    this.reportScore();
+                } else {
+                    this.showFeedback(`✗ Wrong! The answer was ${this.quizQuestion.correctAnswer}`, 'error');
+                }
+                
+                this.updateStats();
+                
+                // Reset to explore mode for next question
+                setTimeout(() => {
+                    this.mode = 'explore';
+                    this.renderQuestionArea();
+                    document.getElementById('action-btn').textContent = '🎯 Quiz Me!';
+                }, 1500);
+            }
+
+            nextGate() {
+                this.gateIndex++;
+                this.gateNum++;
+                this.loadGate();
+            }
+
+            showFeedback(msg, type) {
+                const fb = document.getElementById('feedback');
+                fb.textContent = msg;
+                fb.className = `feedback ${type}`;
+            }
+
+            hideFeedback() {
+                document.getElementById('feedback').className = 'feedback';
+            }
+
+            updateStats() {
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('gate-num').textContent = this.gateNum;
+                document.getElementById('correct').textContent = this.correctCount;
+            }
+
+            reportScore() {
+                if (window.parent !== window) {
+                    window.parent.postMessage({ type: 'GAME_SCORE', game: 'logic-gates', score: this.score }, '*');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => new LogicGates());
+    </script>
+</body>
+</html>

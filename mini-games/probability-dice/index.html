@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Dice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a1040 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ff6b9d, #c77dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stats {
+            display: flex; justify-content: center; gap: 35px;
+            background: rgba(199, 125, 255, 0.1); padding: 12px 30px;
+            border-radius: 12px; border: 1px solid rgba(199, 125, 255, 0.3); margin-top: 15px;
+        }
+        .stat { text-align: center; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #c77dff; }
+
+        .challenge {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(199, 125, 255, 0.1));
+            border: 1px solid rgba(199, 125, 255, 0.3); border-radius: 15px;
+            padding: 25px; margin-bottom: 25px; text-align: center;
+        }
+        .challenge h2 { font-family: 'Orbitron', sans-serif; color: #ff6b9d; font-size: 1.1rem; margin-bottom: 15px; }
+        .question { font-size: 1.2rem; line-height: 1.6; }
+
+        .dice-area {
+            display: flex; justify-content: center; gap: 30px;
+            margin-bottom: 25px; flex-wrap: wrap;
+        }
+        .dice {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+            padding: 12px; gap: 8px;
+            animation: roll 0.5s ease-out;
+        }
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(0.8); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        .dot {
+            width: 12px; height: 12px;
+            background: #2d1b4e; border-radius: 50%;
+        }
+
+        .options {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 15px; margin-bottom: 25px;
+        }
+        .option {
+            background: rgba(199, 125, 255, 0.1);
+            border: 2px solid rgba(199, 125, 255, 0.3);
+            border-radius: 12px; padding: 18px;
+            text-align: center; cursor: pointer;
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .option:hover { 
+            background: rgba(199, 125, 255, 0.2);
+            border-color: #c77dff;
+            transform: translateY(-2px);
+        }
+        .option.selected { border-color: #00ff88; background: rgba(0, 255, 136, 0.15); }
+        .option.correct { border-color: #00ff88; background: rgba(0, 255, 136, 0.3); }
+        .option.incorrect { border-color: #ff6b6b; background: rgba(255, 107, 107, 0.3); }
+
+        .buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .btn {
+            padding: 12px 30px; border: none; border-radius: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s; text-transform: uppercase;
+        }
+        .btn-primary { background: linear-gradient(135deg, #ff6b9d, #c77dff); color: #fff; font-weight: 700; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(199, 125, 255, 0.5); }
+        .btn-secondary { background: rgba(255, 217, 61, 0.2); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.4); }
+        .btn-roll { background: linear-gradient(135deg, #00d4ff, #00ff88); color: #0a0a1a; }
+
+        .feedback {
+            text-align: center; padding: 15px; border-radius: 10px;
+            font-family: 'Orbitron', sans-serif; display: none;
+        }
+        .feedback.success { display: block; background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+        .feedback.error { display: block; background: rgba(255, 100, 100, 0.2); color: #ff6b6b; }
+        .feedback.info { display: block; background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+
+        .explanation {
+            background: rgba(0, 0, 0, 0.3); border-radius: 12px;
+            padding: 20px; margin-top: 20px; display: none;
+        }
+        .explanation h4 { color: #ffd93d; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; }
+        .explanation p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎲 Probability Dice</h1>
+            <div class="stats">
+                <div class="stat"><span class="stat-label">Score</span><div class="stat-value" id="score">0</div></div>
+                <div class="stat"><span class="stat-label">Streak</span><div class="stat-value" id="streak">0</div></div>
+                <div class="stat"><span class="stat-label">Level</span><div class="stat-value" id="level">1</div></div>
+            </div>
+        </header>
+
+        <div class="challenge">
+            <h2 id="challenge-title">Probability Challenge</h2>
+            <p class="question" id="question"></p>
+        </div>
+
+        <div class="dice-area" id="dice-area"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="buttons">
+            <button class="btn btn-roll" id="roll-btn">🎲 Roll Dice</button>
+            <button class="btn btn-primary" id="submit-btn">✓ Submit</button>
+            <button class="btn btn-secondary" id="next-btn" style="display:none;">Next →</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+        <div class="explanation" id="explanation"></div>
+    </div>
+
+    <script>
+        class ProbabilityDice {
+            constructor() {
+                this.score = 0;
+                this.streak = 0;
+                this.level = 1;
+                this.selectedAnswer = null;
+                this.currentProblem = null;
+                this.problems = this.generateProblems();
+                this.problemIndex = 0;
+
+                this.bindEvents();
+                this.loadProblem();
+            }
+
+            generateProblems() {
+                return [
+                    {
+                        title: 'Single Die Probability',
+                        question: 'What is the probability of rolling a 6 on a fair die?',
+                        dice: 1,
+                        options: ['1/6', '1/3', '1/2', '1'],
+                        correct: 0,
+                        explanation: 'A fair die has 6 equally likely outcomes (1-6). Only one outcome is 6, so P(6) = 1/6.',
+                        xp: 50
+                    },
+                    {
+                        title: 'Even Number',
+                        question: 'What is the probability of rolling an even number?',
+                        dice: 1,
+                        options: ['1/6', '1/3', '1/2', '2/3'],
+                        correct: 2,
+                        explanation: 'Even numbers on a die: 2, 4, 6. That\'s 3 favorable outcomes out of 6. P = 3/6 = 1/2.',
+                        xp: 50
+                    },
+                    {
+                        title: 'Sum of Two Dice',
+                        question: 'What is the probability of rolling a sum of 7 with two dice?',
+                        dice: 2,
+                        options: ['1/12', '1/6', '1/9', '5/36'],
+                        correct: 1,
+                        explanation: 'There are 36 total outcomes. Combinations summing to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. P = 6/36 = 1/6.',
+                        xp: 75
+                    },
+                    {
+                        title: 'Double Sixes',
+                        question: 'What is the probability of rolling double sixes (both dice show 6)?',
+                        dice: 2,
+                        options: ['1/36', '1/12', '1/6', '2/36'],
+                        correct: 0,
+                        explanation: 'With two dice, there are 6×6 = 36 outcomes. Only one outcome is (6,6). P = 1/36.',
+                        xp: 75
+                    },
+                    {
+                        title: 'Sum Greater Than 9',
+                        question: 'What is the probability that the sum of two dice is greater than 9?',
+                        dice: 2,
+                        options: ['1/12', '1/6', '5/36', '6/36'],
+                        correct: 3,
+                        explanation: 'Sums >9: 10 (3 ways), 11 (2 ways), 12 (1 way) = 6 ways total. P = 6/36 = 1/6.',
+                        xp: 100
+                    },
+                    {
+                        title: 'Conditional Probability',
+                        question: 'Given that you rolled an even number, what\'s the probability it was a 6?',
+                        dice: 1,
+                        options: ['1/6', '1/3', '1/2', '2/3'],
+                        correct: 1,
+                        explanation: 'Given even numbers {2, 4, 6}, we need P(6|even). Out of 3 even outcomes, only 1 is a 6. P = 1/3.',
+                        xp: 100
+                    },
+                    {
+                        title: 'At Least One Six',
+                        question: 'Rolling two dice, what is the probability of getting at least one 6?',
+                        dice: 2,
+                        options: ['1/3', '11/36', '1/6', '25/36'],
+                        correct: 1,
+                        explanation: 'P(at least one 6) = 1 - P(no sixes). P(no sixes) = (5/6)² = 25/36. So P = 1 - 25/36 = 11/36.',
+                        xp: 125
+                    }
+                ];
+            }
+
+            bindEvents() {
+                document.getElementById('roll-btn').onclick = () => this.rollDice();
+                document.getElementById('submit-btn').onclick = () => this.checkAnswer();
+                document.getElementById('next-btn').onclick = () => this.nextProblem();
+            }
+
+            loadProblem() {
+                if (this.problemIndex >= this.problems.length) {
+                    this.problemIndex = 0;
+                    this.level++;
+                }
+
+                this.currentProblem = this.problems[this.problemIndex];
+                this.selectedAnswer = null;
+
+                document.getElementById('challenge-title').textContent = this.currentProblem.title;
+                document.getElementById('question').textContent = this.currentProblem.question;
+
+                this.renderDice([1]);
+                this.renderOptions();
+                this.hideFeedback();
+                document.getElementById('explanation').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('next-btn').style.display = 'none';
+                this.updateStats();
+            }
+
+            renderDice(values) {
+                const area = document.getElementById('dice-area');
+                area.innerHTML = '';
+                
+                for (let i = 0; i < this.currentProblem.dice; i++) {
+                    const value = values[i] || 1;
+                    const dice = document.createElement('div');
+                    dice.className = 'dice';
+                    dice.innerHTML = this.getDots(value);
+                    area.appendChild(dice);
+                }
+            }
+
+            getDots(value) {
+                const patterns = {
+                    1: [4],
+                    2: [0, 8],
+                    3: [0, 4, 8],
+                    4: [0, 2, 6, 8],
+                    5: [0, 2, 4, 6, 8],
+                    6: [0, 2, 3, 5, 6, 8]
+                };
+                
+                let grid = ['', '', '', '', '', '', '', '', ''];
+                patterns[value].forEach(pos => grid[pos] = '<div class="dot"></div>');
+                return grid.join('');
+            }
+
+            rollDice() {
+                const values = [];
+                for (let i = 0; i < this.currentProblem.dice; i++) {
+                    values.push(Math.floor(Math.random() * 6) + 1);
+                }
+                this.renderDice(values);
+            }
+
+            renderOptions() {
+                const container = document.getElementById('options');
+                container.innerHTML = '';
+                
+                this.currentProblem.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'option';
+                    div.textContent = opt;
+                    div.onclick = () => this.selectOption(i);
+                    container.appendChild(div);
+                });
+            }
+
+            selectOption(index) {
+                this.selectedAnswer = index;
+                document.querySelectorAll('.option').forEach((opt, i) => {
+                    opt.className = i === index ? 'option selected' : 'option';
+                });
+            }
+
+            checkAnswer() {
+                if (this.selectedAnswer === null) {
+                    this.showFeedback('Please select an answer!', 'info');
+                    return;
+                }
+
+                const correct = this.selectedAnswer === this.currentProblem.correct;
+                const options = document.querySelectorAll('.option');
+                
+                options.forEach((opt, i) => {
+                    if (i === this.currentProblem.correct) {
+                        opt.classList.add('correct');
+                    } else if (i === this.selectedAnswer && !correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (correct) {
+                    this.score += this.currentProblem.xp;
+                    this.streak++;
+                    this.showFeedback(`✓ Correct! +${this.currentProblem.xp} XP`, 'success');
+                    this.reportScore();
+                } else {
+                    this.streak = 0;
+                    this.showFeedback('✗ Incorrect!', 'error');
+                }
+
+                // Show explanation
+                const exp = document.getElementById('explanation');
+                exp.innerHTML = `<h4>📚 Explanation</h4><p>${this.currentProblem.explanation}</p>`;
+                exp.style.display = 'block';
+
+                document.getElementById('submit-btn').style.display = 'none';
+                document.getElementById('next-btn').style.display = 'inline-block';
+                this.updateStats();
+            }
+
+            nextProblem() {
+                this.problemIndex++;
+                this.loadProblem();
+            }
+
+            showFeedback(msg, type) {
+                const fb = document.getElementById('feedback');
+                fb.textContent = msg;
+                fb.className = `feedback ${type}`;
+            }
+
+            hideFeedback() {
+                document.getElementById('feedback').className = 'feedback';
+            }
+
+            updateStats() {
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('streak').textContent = this.streak;
+                document.getElementById('level').textContent = this.level;
+            }
+
+            reportScore() {
+                if (window.parent !== window) {
+                    window.parent.postMessage({ type: 'GAME_SCORE', game: 'probability-dice', score: this.score }, '*');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => new ProbabilityDice());
+    </script>
+</body>
+</html>

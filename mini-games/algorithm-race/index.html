@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Race</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Mission Panel -->
+        <div id="missionPanel" class="mission-panel">
+            <div class="mission-header">
+                <span class="mission-icon">🏁</span>
+                <h1>ALGORITHM RACE</h1>
+            </div>
+            <div class="mission-content">
+                <h2 id="missionTitle">Race the Algorithms!</h2>
+                <p id="missionText">Watch algorithms compete and predict the winner. Learn their time complexities!</p>
+                
+                <div class="mission-objectives">
+                    <h3>Objectives:</h3>
+                    <ul id="objectivesList">
+                        <li>Predict the fastest algorithm</li>
+                        <li>Understand time complexity</li>
+                        <li>Learn algorithm efficiency</li>
+                    </ul>
+                </div>
+                
+                <div class="mission-stats">
+                    <div class="stat">
+                        <span class="stat-label">Algorithms</span>
+                        <span id="algoCountDisplay" class="stat-value">3</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Data Size</span>
+                        <span id="dataSizeDisplay" class="stat-value">100</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Category</span>
+                        <span id="categoryDisplay" class="stat-value">Sorting</span>
+                    </div>
+                </div>
+                
+                <button id="startBtn" class="start-btn">START RACE</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="gameArea" class="game-area hidden">
+            <div class="game-header">
+                <div class="level-info">
+                    <span class="label">Level</span>
+                    <span id="levelDisplay" class="value">1</span>
+                </div>
+                <div class="score-info">
+                    <span class="label">Score</span>
+                    <span id="scoreDisplay" class="value">0</span>
+                </div>
+                <div class="streak-info">
+                    <span class="label">Streak</span>
+                    <span id="streakDisplay" class="value">0</span>
+                </div>
+            </div>
+
+            <!-- Race Track -->
+            <div class="race-track-container">
+                <h3>🏎️ Race Track - Array Size: <span id="arraySize">100</span></h3>
+                <div id="raceTrack" class="race-track"></div>
+            </div>
+
+            <!-- Prediction Section -->
+            <div id="predictionSection" class="prediction-section">
+                <h3>🎯 Predict the Winner!</h3>
+                <p>Which algorithm will finish first?</p>
+                <div id="predictionButtons" class="prediction-buttons"></div>
+            </div>
+
+            <!-- Algorithm Info -->
+            <div id="algoInfoSection" class="algo-info-section hidden">
+                <h3>📊 Algorithm Analysis</h3>
+                <div id="algoCards" class="algo-cards"></div>
+            </div>
+
+            <!-- Race Progress -->
+            <div id="raceProgress" class="race-progress hidden">
+                <h3>🏃 Race in Progress...</h3>
+                <div id="progressBars" class="progress-bars"></div>
+            </div>
+
+            <!-- Race Result -->
+            <div id="raceResult" class="race-result hidden">
+                <h3 id="resultHeader">🏆 Race Complete!</h3>
+                <div id="resultDetails" class="result-details"></div>
+                <button id="nextRaceBtn" class="next-race-btn">Next Race →</button>
+            </div>
+        </div>
+
+        <!-- Final Result Panel -->
+        <div id="resultPanel" class="result-panel hidden">
+            <div id="resultIcon" class="result-icon">🎉</div>
+            <h2 id="resultTitle">Race Champion!</h2>
+            <p id="resultText">You've mastered algorithm efficiency!</p>
+            
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="label">Correct</span>
+                    <span id="resultCorrect" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">Score</span>
+                    <span id="resultScore" class="value">0</span>
+                </div>
+                <div class="result-stat">
+                    <span class="label">XP Earned</span>
+                    <span id="resultXP" class="value">+0</span>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="continueBtn" class="action-btn primary">Next Level →</button>
+                <button id="retryBtn" class="action-btn">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

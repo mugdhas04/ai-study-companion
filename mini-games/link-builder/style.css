@@ -1,0 +1,503 @@
+/* Link Builder Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #0a1628 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border-radius: 15px;
+    border: 2px solid #9b59b6;
+    margin-bottom: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-icon {
+    font-size: 2.5rem;
+}
+
+.game-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #9b59b6;
+    letter-spacing: 2px;
+}
+
+.header-right {
+    display: flex;
+    gap: 25px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #9b59b6;
+}
+
+/* Panels */
+.panel {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Mission Panel */
+.mission-panel {
+    margin-bottom: 20px;
+}
+
+.mission-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.mission-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #9b59b6;
+    margin-bottom: 15px;
+}
+
+.mission-panel p {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.initial-list-display,
+.target-list-display {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.initial-list-display .label,
+.target-list-display .label {
+    display: block;
+    color: #888;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.list-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.list-visual .node {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+.list-visual .arrow {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.list-visual .null {
+    color: #e74c3c;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+/* Game Area */
+.game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Current List Panel */
+.current-list-panel {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #9b59b6;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.current-list-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #9b59b6;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.list-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+.list-container.target {
+    border: 2px dashed #555;
+}
+
+.head-pointer {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.null-pointer {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.list-nodes {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.list-node {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.list-node .node-box {
+    display: flex;
+    background: linear-gradient(145deg, #2d2d44, #1a1a2e);
+    border: 2px solid #9b59b6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.list-node .data {
+    padding: 15px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-right: 2px solid #9b59b6;
+}
+
+.list-node .next {
+    padding: 15px 12px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.list-node .arrow {
+    color: #9b59b6;
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+.list-node.highlight .node-box {
+    border-color: #f39c12;
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+}
+
+/* Operations Panel */
+.operations-panel {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #444;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.operations-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #9b59b6;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.operation-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.operation-row input {
+    background: #1a1a2e;
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    width: 150px;
+    text-align: center;
+}
+
+.operation-row input:focus {
+    outline: none;
+    border-color: #9b59b6;
+}
+
+.operation-row input::placeholder {
+    color: #666;
+}
+
+.operation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.op-btn {
+    background: linear-gradient(145deg, #2d2d44, #1a1a2e);
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 100px;
+}
+
+.op-btn:hover {
+    border-color: #9b59b6;
+    transform: translateY(-2px);
+}
+
+.op-btn:active {
+    transform: translateY(0);
+}
+
+.op-icon {
+    font-size: 1.5rem;
+}
+
+.op-btn span:last-child {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Target Panel */
+.target-panel {
+    background: linear-gradient(145deg, #1a1a2e, #2d2d44);
+    border: 2px solid #444;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.target-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #e74c3c;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Controls */
+.controls-panel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: #fff;
+    box-shadow: 0 5px 20px rgba(155, 89, 182, 0.4);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(155, 89, 182, 0.6);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+}
+
+.btn-hint {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: #fff;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Result Panel */
+.result-panel {
+    padding: 50px;
+}
+
+.result-icon {
+    font-size: 6rem;
+    margin-bottom: 20px;
+}
+
+.result-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #9b59b6;
+    margin-bottom: 10px;
+}
+
+.result-panel p {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.result-stat {
+    text-align: center;
+}
+
+.result-stat .stat-value {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Animation */
+@keyframes nodeInsert {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.list-node.inserting {
+    animation: nodeInsert 0.3s ease-out;
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .mission-panel h2 {
+        font-size: 1.5rem;
+    }
+    
+    .operation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .op-btn {
+        width: 80%;
+    }
+    
+    .controls-panel {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Arena</title>
+</head>
+<body>
+<div id="gameContainer">
+    <!-- Game Header -->
+    <div class="game-header">
+        <div class="header-left">
+            <h1>🔢 SORTING ARENA</h1>
+            <p class="game-subtitle">Master the art of sorting algorithms</p>
+        </div>
+        <div class="header-right">
+            <div class="stat-box">
+                <span class="stat-label">MODE</span>
+                <span class="stat-value" id="modeDisplay">BUBBLE SORT</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">SWAPS</span>
+                <span class="stat-value" id="swapsDisplay">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="scoreDisplay">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode Selection -->
+    <div class="mode-panel" id="modePanel">
+        <h3>🎯 SELECT SORTING MODE</h3>
+        <div class="mode-grid">
+            <button class="mode-btn" data-mode="bubble">
+                <div class="mode-icon">🫧</div>
+                <div class="mode-name">Bubble Sort</div>
+                <div class="mode-desc">Compare adjacent elements</div>
+            </button>
+            <button class="mode-btn" data-mode="insertion">
+                <div class="mode-icon">➡️</div>
+                <div class="mode-name">Insertion Sort</div>
+                <div class="mode-desc">Insert into sorted portion</div>
+            </button>
+            <button class="mode-btn" data-mode="selection">
+                <div class="mode-icon">🎯</div>
+                <div class="mode-name">Selection Sort</div>
+                <div class="mode-desc">Find minimum element</div>
+            </button>
+            <button class="mode-btn" data-mode="quick">
+                <div class="mode-icon">⚡</div>
+                <div class="mode-name">Quick Sort</div>
+                <div class="mode-desc">Divide and conquer</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mission Panel -->
+    <div class="mission-panel hidden" id="missionPanel">
+        <h3>🎯 MISSION</h3>
+        <p id="missionText">Sort the array using your selected algorithm!</p>
+        <div class="algorithm-hint" id="algorithmHint"></div>
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-label-small">Optimal Swaps</span>
+                <span class="stat-value-small" id="optimalSwaps">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label-small">Your Swaps</span>
+                <span class="stat-value-small" id="currentSwaps">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label-small">Efficiency</span>
+                <span class="stat-value-small" id="efficiency">100%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Array Container -->
+    <div class="array-container hidden" id="arrayContainer">
+        <!-- Array elements will be added here -->
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-panel hidden" id="controlsPanel">
+        <button class="control-btn" id="hintBtn">💡 HINT</button>
+        <button class="control-btn" id="compareBtn">🔍 COMPARE</button>
+        <button class="control-btn primary" id="submitBtn">✓ SUBMIT</button>
+        <button class="control-btn" id="resetBtn">↻ RESET</button>
+        <button class="control-btn" id="changeModeBtn">🔄 CHANGE MODE</button>
+    </div>
+
+    <!-- Algorithm Comparison Panel -->
+    <div class="comparison-panel hidden" id="comparisonPanel">
+        <h3>⚡ ALGORITHM RACE</h3>
+        <p>Watch different algorithms solve the same problem!</p>
+        <div class="race-container" id="raceContainer">
+            <div class="race-track">
+                <div class="race-label">Bubble Sort</div>
+                <div class="race-bar" id="bubbleBar"></div>
+                <div class="race-time" id="bubbleTime">-</div>
+            </div>
+            <div class="race-track">
+                <div class="race-label">Quick Sort</div>
+                <div class="race-bar" id="quickBar"></div>
+                <div class="race-time" id="quickTime">-</div>
+            </div>
+            <div class="race-track">
+                <div class="race-label">Merge Sort</div>
+                <div class="race-bar" id="mergeBar"></div>
+                <div class="race-time" id="mergeTime">-</div>
+            </div>
+        </div>
+        <button class="control-btn primary" id="startRaceBtn">🏁 START RACE</button>
+    </div>
+
+    <!-- Result Panel -->
+    <div class="result-panel hidden" id="resultPanel">
+        <div class="result-content">
+            <div class="result-icon" id="resultIcon">⭐</div>
+            <h2 class="result-title" id="resultTitle">PERFECT SORT!</h2>
+            <div class="result-message" id="resultMessage">
+                You sorted the array efficiently!
+            </div>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="result-value" id="resultSwaps">0</span>
+                    <span class="result-label">Swaps Made</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="resultEfficiency">100%</span>
+                    <span class="result-label">Efficiency</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="resultXP">+50</span>
+                    <span class="result-label">XP Earned</span>
+                </div>
+            </div>
+            <div class="result-buttons">
+                <button class="continue-btn" id="nextLevelBtn">NEXT LEVEL →</button>
+                <button class="continue-btn secondary" id="changeModeResultBtn">CHANGE MODE</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

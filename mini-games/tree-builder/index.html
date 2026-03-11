@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Builder - AI Study Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <span class="game-icon">🌳</span>
+                <h1>Tree Builder</h1>
+            </div>
+            <div class="header-right">
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="levelDisplay">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="scoreDisplay">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mission Panel -->
+        <div class="panel mission-panel" id="missionPanel">
+            <div class="mission-icon">🌲</div>
+            <h2>Build the Binary Search Tree!</h2>
+            <p id="missionText">Insert nodes correctly to build a valid BST</p>
+            <div class="mission-nodes" id="nodesToInsert"></div>
+            <button class="btn btn-primary" id="startBtn">BEGIN BUILDING</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area hidden" id="gameArea">
+            <!-- Tree Canvas -->
+            <div class="tree-container">
+                <canvas id="treeCanvas" width="800" height="500"></canvas>
+            </div>
+
+            <!-- Current Node -->
+            <div class="current-node-panel">
+                <span class="label">Insert Node:</span>
+                <div class="current-node" id="currentNode">?</div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-panel">
+                <button class="btn btn-secondary" id="undoBtn">↩️ Undo</button>
+                <button class="btn btn-hint" id="hintBtn">💡 Hint</button>
+                <button class="btn btn-primary" id="submitBtn">✅ Submit Tree</button>
+            </div>
+
+            <!-- Traversal Display -->
+            <div class="traversal-panel">
+                <div class="traversal-item">
+                    <span class="traversal-label">Inorder:</span>
+                    <span class="traversal-value" id="inorderDisplay">-</span>
+                </div>
+                <div class="traversal-item">
+                    <span class="traversal-label">Preorder:</span>
+                    <span class="traversal-value" id="preorderDisplay">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="panel result-panel hidden" id="resultPanel">
+            <div class="result-icon" id="resultIcon">🎉</div>
+            <h2 id="resultTitle">Tree Complete!</h2>
+            <p id="resultText">Perfect BST construction!</p>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="stat-value" id="resultScore">0</span>
+                    <span class="stat-label">Score</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value" id="resultXP">+50</span>
+                    <span class="stat-label">XP Earned</span>
+                </div>
+            </div>
+            <div class="result-buttons">
+                <button class="btn btn-primary" id="continueBtn">Continue →</button>
+                <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/api-client.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<div id="gameContainer">
+    <div class="game-header">
+        <div class="header-left">
+            <h1>🎯 ARRAY SORTER</h1>
+            <p class="game-subtitle">Sort the numbers in order</p>
+        </div>
+        <div class="header-right">
+            <div class="stat-box">
+                <span class="stat-label">LEVEL</span>
+                <span class="stat-value" id="levelDisplay">1</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">MOVES</span>
+                <span class="stat-value" id="movesDisplay">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="scoreDisplay">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mission-panel">
+        <h3>🎯 MISSION</h3>
+        <p id="missionText">Click two numbers to swap them. Sort the array in ascending order!</p>
+        <div class="difficulty-badge" id="difficultyBadge">BEGINNER</div>
+    </div>
+
+    <div class="array-container" id="arrayContainer">
+        <!-- Array elements will be dynamically added here -->
+    </div>
+
+    <div class="controls-panel">
+        <button class="control-btn" id="hintBtn">💡 HINT</button>
+        <button class="control-btn primary" id="submitBtn">✓ SUBMIT</button>
+        <button class="control-btn" id="resetBtn">↻ RESET</button>
+    </div>
+
+    <div class="result-panel hidden" id="resultPanel">
+        <div class="result-content">
+            <div class="result-icon" id="resultIcon">✓</div>
+            <h2 class="result-title" id="resultTitle">LEVEL COMPLETE!</h2>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="result-value" id="resultMoves">0</span>
+                    <span class="result-label">Moves</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-value" id="resultXP">+100</span>
+                    <span class="result-label">XP</span>
+                </div>
+            </div>
+            <button class="continue-btn" id="continueBtn">CONTINUE →</button>
+        </div>
+    </div>
+</div>

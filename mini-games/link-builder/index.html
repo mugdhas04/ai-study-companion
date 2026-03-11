@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Builder - AI Study Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <span class="game-icon">🔗</span>
+                <h1>Link Builder</h1>
+            </div>
+            <div class="header-right">
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="levelDisplay">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Operations</span>
+                    <span class="stat-value" id="opsDisplay">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="scoreDisplay">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mission Panel -->
+        <div class="panel mission-panel" id="missionPanel">
+            <div class="mission-icon">⛓️</div>
+            <h2>Build the Linked List!</h2>
+            <p id="missionText">Perform operations to build the target linked list</p>
+            <div class="initial-list-display">
+                <span class="label">Starting List:</span>
+                <div class="list-visual" id="initialListVisual"></div>
+            </div>
+            <div class="target-list-display">
+                <span class="label">Target List:</span>
+                <div class="list-visual" id="targetListVisual"></div>
+            </div>
+            <button class="btn btn-primary" id="startBtn">BEGIN BUILDING</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area hidden" id="gameArea">
+            <!-- Current List Display -->
+            <div class="current-list-panel">
+                <h3>Current Linked List</h3>
+                <div class="list-container" id="currentListContainer">
+                    <div class="head-pointer">HEAD</div>
+                    <div class="list-nodes" id="listNodes"></div>
+                    <div class="null-pointer">NULL</div>
+                </div>
+            </div>
+
+            <!-- Operations Panel -->
+            <div class="operations-panel">
+                <h3>Operations</h3>
+                <div class="operation-row">
+                    <input type="number" id="valueInput" placeholder="Value" min="0" max="99">
+                    <input type="number" id="positionInput" placeholder="Position" min="0" max="20">
+                </div>
+                <div class="operation-buttons">
+                    <button class="op-btn" id="insertFrontBtn">
+                        <span class="op-icon">⬅️</span>
+                        Insert Front
+                    </button>
+                    <button class="op-btn" id="insertEndBtn">
+                        <span class="op-icon">➡️</span>
+                        Insert End
+                    </button>
+                    <button class="op-btn" id="insertAtBtn">
+                        <span class="op-icon">📍</span>
+                        Insert At
+                    </button>
+                    <button class="op-btn" id="deleteAtBtn">
+                        <span class="op-icon">🗑️</span>
+                        Delete At
+                    </button>
+                    <button class="op-btn" id="reverseBtn">
+                        <span class="op-icon">🔄</span>
+                        Reverse
+                    </button>
+                </div>
+            </div>
+
+            <!-- Target Display -->
+            <div class="target-panel">
+                <h3>Target</h3>
+                <div class="list-container target">
+                    <div class="head-pointer">HEAD</div>
+                    <div class="list-nodes" id="targetNodes"></div>
+                    <div class="null-pointer">NULL</div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-panel">
+                <button class="btn btn-secondary" id="undoBtn">↩️ Undo</button>
+                <button class="btn btn-hint" id="hintBtn">💡 Hint</button>
+                <button class="btn btn-danger" id="resetBtn">🔄 Reset</button>
+                <button class="btn btn-primary" id="submitBtn">✅ Check Solution</button>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="panel result-panel hidden" id="resultPanel">
+            <div class="result-icon" id="resultIcon">🎉</div>
+            <h2 id="resultTitle">List Complete!</h2>
+            <p id="resultText">Perfect linked list construction!</p>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="stat-value" id="resultOps">0</span>
+                    <span class="stat-label">Operations</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value" id="resultScore">0</span>
+                    <span class="stat-label">Score</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value" id="resultXP">+50</span>
+                    <span class="stat-label">XP Earned</span>
+                </div>
+            </div>
+            <div class="result-buttons">
+                <button class="btn btn-primary" id="continueBtn">Continue →</button>
+                <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/api-client.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

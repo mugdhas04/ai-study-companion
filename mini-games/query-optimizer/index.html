@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Optimizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .game-container { max-width: 1000px; margin: 0 auto; }
+        .game-header { text-align: center; margin-bottom: 25px; }
+        .game-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 12px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        .stat { display: flex; flex-direction: column; align-items: center; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #00ff88; font-weight: 700; }
+        
+        .query-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        .query-panel h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .query-code {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            color: #00ff88;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .execution-time {
+            background: rgba(255, 100, 100, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px solid rgba(255, 100, 100, 0.4);
+        }
+        .execution-time span { color: #ff6b6b; font-family: 'Orbitron', sans-serif; }
+        
+        .table-schema {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-schema h3 { color: #7c3aed; font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 15px; }
+        .schema-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+        .schema-table th {
+            background: rgba(124, 58, 237, 0.3);
+            padding: 10px;
+            text-align: left;
+            color: #7c3aed;
+        }
+        .schema-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        .index-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .index-option {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .index-option:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        .index-option.selected {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.2);
+        }
+        .index-option h4 { color: #00d4ff; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; margin-bottom: 8px; }
+        .index-option p { color: #888; font-size: 0.85rem; }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #0a0a1a;
+            font-weight: 700;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5); }
+        .btn-secondary { background: rgba(255, 217, 61, 0.2); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.4); }
+        
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .feedback.success { background: rgba(0, 255, 136, 0.2); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.4); }
+        .feedback.error { background: rgba(255, 100, 100, 0.2); color: #ff6b6b; border: 1px solid rgba(255, 100, 100, 0.4); }
+        .feedback.hint { background: rgba(255, 217, 61, 0.2); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.4); }
+        
+        .optimized { background: rgba(0, 255, 136, 0.2) !important; border-color: rgba(0, 255, 136, 0.4) !important; }
+        .optimized span { color: #00ff88 !important; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>⚡ Query Optimizer</h1>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Optimized</span>
+                    <span class="stat-value" id="optimized">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="query-panel">
+                <h2>🔍 Query to Optimize</h2>
+                <div class="query-code" id="query-code"></div>
+                <div class="execution-time" id="execution-time">
+                    <span>Execution Time: <span id="exec-time">2.5s</span></span>
+                </div>
+            </div>
+
+            <div class="table-schema">
+                <h3>📊 Table Schema: <span id="table-name">orders</span></h3>
+                <table class="schema-table">
+                    <thead>
+                        <tr><th>Column</th><th>Type</th><th>Current Index</th></tr>
+                    </thead>
+                    <tbody id="schema-body"></tbody>
+                </table>
+            </div>
+
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">🎯 Select the Best Index Strategy:</h3>
+            <div class="index-options" id="index-options"></div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="apply-btn">⚡ Apply Index</button>
+                <button class="btn btn-secondary" id="hint-btn">💡 Hint</button>
+            </div>
+
+            <div class="feedback" id="feedback" style="display: none;"></div>
+        </main>
+    </div>
+
+    <script>
+        class QueryOptimizer {
+            constructor() {
+                this.score = 0;
+                this.level = 1;
+                this.optimized = 0;
+                this.selectedOption = null;
+                this.challenges = this.generateChallenges();
+                this.currentIndex = 0;
+                
+                this.bindEvents();
+                this.loadChallenge();
+            }
+            
+            generateChallenges() {
+                return [
+                    {
+                        query: "SELECT * FROM orders WHERE customer_id = 12345;",
+                        table: "orders",
+                        schema: [
+                            { column: "order_id", type: "INT", index: "PRIMARY KEY" },
+                            { column: "customer_id", type: "INT", index: "None" },
+                            { column: "order_date", type: "DATE", index: "None" },
+                            { column: "total", type: "DECIMAL", index: "None" }
+                        ],
+                        execTime: "2.5s",
+                        options: [
+                            { id: 1, title: "Index on customer_id", desc: "B-tree index for fast customer lookups", correct: true },
+                            { id: 2, title: "Index on order_date", desc: "B-tree index for date range queries", correct: false },
+                            { id: 3, title: "Full table scan", desc: "No additional index needed", correct: false },
+                            { id: 4, title: "Index on total", desc: "B-tree index for amount filtering", correct: false }
+                        ],
+                        hint: "Look at the WHERE clause - which column is being filtered?",
+                        xp: 100
+                    },
+                    {
+                        query: "SELECT * FROM products WHERE category = 'Electronics' AND price < 500;",
+                        table: "products",
+                        schema: [
+                            { column: "product_id", type: "INT", index: "PRIMARY KEY" },
+                            { column: "name", type: "VARCHAR", index: "None" },
+                            { column: "category", type: "VARCHAR", index: "None" },
+                            { column: "price", type: "DECIMAL", index: "None" }
+                        ],
+                        execTime: "3.2s",
+                        options: [
+                            { id: 1, title: "Index on name", desc: "For searching by product name", correct: false },
+                            { id: 2, title: "Composite index (category, price)", desc: "Covers both filter conditions", correct: true },
+                            { id: 3, title: "Index on price only", desc: "Single column index", correct: false },
+                            { id: 4, title: "Index on category only", desc: "Single column index", correct: false }
+                        ],
+                        hint: "When filtering on multiple columns, a composite index can be very efficient.",
+                        xp: 150
+                    },
+                    {
+                        query: "SELECT customer_id, SUM(total) FROM orders GROUP BY customer_id ORDER BY SUM(total) DESC;",
+                        table: "orders",
+                        schema: [
+                            { column: "order_id", type: "INT", index: "PRIMARY KEY" },
+                            { column: "customer_id", type: "INT", index: "None" },
+                            { column: "total", type: "DECIMAL", index: "None" }
+                        ],
+                        execTime: "4.8s",
+                        options: [
+                            { id: 1, title: "Index on total", desc: "Index the aggregated column", correct: false },
+                            { id: 2, title: "Index on order_id", desc: "Already has primary key", correct: false },
+                            { id: 3, title: "Index on customer_id", desc: "Optimize GROUP BY operation", correct: true },
+                            { id: 4, title: "No index needed", desc: "Aggregations don't benefit", correct: false }
+                        ],
+                        hint: "GROUP BY operations benefit from indexes on the grouping column.",
+                        xp: 150
+                    },
+                    {
+                        query: "SELECT * FROM users WHERE email = 'john@example.com';",
+                        table: "users",
+                        schema: [
+                            { column: "user_id", type: "INT", index: "PRIMARY KEY" },
+                            { column: "email", type: "VARCHAR", index: "None" },
+                            { column: "name", type: "VARCHAR", index: "None" },
+                            { column: "created_at", type: "DATETIME", index: "None" }
+                        ],
+                        execTime: "1.8s",
+                        options: [
+                            { id: 1, title: "Index on name", desc: "For name searches", correct: false },
+                            { id: 2, title: "Index on created_at", desc: "For date filtering", correct: false },
+                            { id: 3, title: "UNIQUE index on email", desc: "Email lookups are common, and emails should be unique", correct: true },
+                            { id: 4, title: "Full text index", desc: "For text searching", correct: false }
+                        ],
+                        hint: "Email addresses are typically unique identifiers for users.",
+                        xp: 125
+                    }
+                ];
+            }
+            
+            bindEvents() {
+                document.getElementById('apply-btn').addEventListener('click', () => this.applyIndex());
+                document.getElementById('hint-btn').addEventListener('click', () => this.showHint());
+            }
+            
+            loadChallenge() {
+                if (this.currentIndex >= this.challenges.length) {
+                    this.currentIndex = 0;
+                    this.level++;
+                }
+                
+                const challenge = this.challenges[this.currentIndex];
+                document.getElementById('query-code').textContent = challenge.query;
+                document.getElementById('exec-time').textContent = challenge.execTime;
+                document.getElementById('table-name').textContent = challenge.table;
+                
+                const schemaBody = document.getElementById('schema-body');
+                schemaBody.innerHTML = challenge.schema.map(col => `
+                    <tr>
+                        <td>${col.column}</td>
+                        <td>${col.type}</td>
+                        <td>${col.index}</td>
+                    </tr>
+                `).join('');
+                
+                const optionsContainer = document.getElementById('index-options');
+                optionsContainer.innerHTML = challenge.options.map(opt => `
+                    <div class="index-option" data-id="${opt.id}" data-correct="${opt.correct}">
+                        <h4>${opt.title}</h4>
+                        <p>${opt.desc}</p>
+                    </div>
+                `).join('');
+                
+                document.querySelectorAll('.index-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        document.querySelectorAll('.index-option').forEach(o => o.classList.remove('selected'));
+                        opt.classList.add('selected');
+                        this.selectedOption = opt;
+                    });
+                });
+                
+                this.selectedOption = null;
+                this.hideFeedback();
+                this.updateStats();
+            }
+            
+            applyIndex() {
+                if (!this.selectedOption) {
+                    this.showFeedback('Select an index strategy first!', 'error');
+                    return;
+                }
+                
+                const isCorrect = this.selectedOption.dataset.correct === 'true';
+                const challenge = this.challenges[this.currentIndex];
+                
+                if (isCorrect) {
+                    this.score += challenge.xp;
+                    this.optimized++;
+                    document.getElementById('execution-time').classList.add('optimized');
+                    document.getElementById('exec-time').textContent = '0.05s';
+                    this.showFeedback(`✓ Query optimized! +${challenge.xp} XP`, 'success');
+                    
+                    setTimeout(() => {
+                        this.currentIndex++;
+                        document.getElementById('execution-time').classList.remove('optimized');
+                        this.loadChallenge();
+                    }, 2000);
+                    
+                    this.reportScore();
+                } else {
+                    this.showFeedback('Not the best choice. Think about which column is in the WHERE clause.', 'error');
+                }
+                
+                this.updateStats();
+            }
+            
+            showHint() {
+                const hint = this.challenges[this.currentIndex].hint;
+                this.showFeedback(`💡 ${hint}`, 'hint');
+            }
+            
+            showFeedback(msg, type) {
+                const fb = document.getElementById('feedback');
+                fb.textContent = msg;
+                fb.className = `feedback ${type}`;
+                fb.style.display = 'block';
+            }
+            
+            hideFeedback() {
+                document.getElementById('feedback').style.display = 'none';
+            }
+            
+            updateStats() {
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('level').textContent = this.level;
+                document.getElementById('optimized').textContent = this.optimized;
+            }
+            
+            reportScore() {
+                if (window.parent !== window) {
+                    window.parent.postMessage({ type: 'GAME_SCORE', game: 'query-optimizer', score: this.score }, '*');
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new QueryOptimizer());
+    </script>
+</body>
+</html>

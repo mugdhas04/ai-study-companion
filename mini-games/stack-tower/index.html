@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Tower - DSA Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="game-header">
+            <div class="header-left">
+                <h1>🎮 STACK TOWER</h1>
+                <p class="subtitle">Learn LIFO (Last In, First Out)</p>
+            </div>
+            <div class="header-right">
+                <div class="stat">
+                    <span class="stat-label">SCORE</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">LEVEL</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Brief -->
+        <div class="mission-panel" id="missionPanel">
+            <h2>📋 MISSION</h2>
+            <p id="missionText">Push blocks onto the stack in the correct order!</p>
+            <div class="operation-sequence" id="operationSequence"></div>
+            <button class="btn-start" id="startBtn">START GAME</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area" id="gameArea" style="display: none;">
+            <!-- Stack Visualization -->
+            <div class="stack-container">
+                <div class="stack-title">STACK (LIFO)</div>
+                <div class="stack" id="stack">
+                    <div class="stack-empty-message">Empty Stack</div>
+                </div>
+            </div>
+
+            <!-- Available Blocks -->
+            <div class="blocks-container">
+                <div class="blocks-title">AVAILABLE BLOCKS</div>
+                <div class="blocks-grid" id="blocksGrid"></div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <button class="btn-action btn-push" id="pushBtn" disabled>
+                    <span class="btn-icon">⬆️</span>
+                    PUSH
+                </button>
+                <button class="btn-action btn-pop" id="popBtn" disabled>
+                    <span class="btn-icon">⬇️</span>
+                    POP
+                </button>
+                <button class="btn-action btn-peek" id="peekBtn" disabled>
+                    <span class="btn-icon">👁️</span>
+                    PEEK
+                </button>
+            </div>
+
+            <!-- Operation Log -->
+            <div class="operation-log">
+                <div class="log-title">OPERATION LOG</div>
+                <div class="log-content" id="logContent"></div>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="result-panel" id="resultPanel" style="display: none;">
+            <div class="result-content">
+                <h2 id="resultTitle">🎉 LEVEL COMPLETE!</h2>
+                <p id="resultMessage">Great job! You've mastered Stack operations.</p>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <span class="result-label">Operations</span>
+                        <span class="result-value" id="resultOps">0</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-label">XP Earned</span>
+                        <span class="result-value" id="resultXP">+20</span>
+                    </div>
+                </div>
+                <button class="btn-continue" id="continueBtn">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/api-client.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

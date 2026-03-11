@@ -1,0 +1,585 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+#gameContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    animation: slideDown 0.5s ease-out;
+}
+
+.header-left h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Mode Selection Panel */
+.mode-panel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.mode-panel h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-family: 'Orbitron', monospace;
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.mode-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(231, 76, 60, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.mode-btn:hover {
+    transform: translateY(-5px);
+    border-color: #e74c3c;
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.mode-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.mode-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e74c3c;
+}
+
+.mode-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Mission Panel */
+.mission-panel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.mission-panel h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', monospace;
+}
+
+.mission-panel p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+.algorithm-hint {
+    background: rgba(231, 76, 60, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #e74c3c;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.stats-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label-small {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 5px;
+}
+
+.stat-value-small {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Array Container */
+.array-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    min-height: 300px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.array-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.array-bar {
+    width: 50px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 8px 8px 0 0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.array-bar::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.array-element:hover .array-bar {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4);
+}
+
+.array-element.selected .array-bar {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border-color: #f39c12;
+    animation: pulse 1s infinite;
+}
+
+.array-element.selected .array-bar::after {
+    border-color: #f39c12;
+    animation: glow 1s infinite;
+}
+
+.array-index {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Controls Panel */
+.controls-panel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn.primary {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-color: #e74c3c;
+}
+
+.control-btn.primary:hover {
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Comparison Panel */
+.comparison-panel {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.comparison-panel h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', monospace;
+}
+
+.comparison-panel > p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+}
+
+.race-container {
+    margin-bottom: 20px;
+}
+
+.race-track {
+    display: grid;
+    grid-template-columns: 150px 1fr 100px;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.race-label {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.race-bar {
+    height: 30px;
+    background: rgba(231, 76, 60, 0.2);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.race-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    border-radius: 15px;
+    transition: width 0.5s ease-out;
+}
+
+.race-bar.racing::after {
+    animation: racing 2s ease-out forwards;
+}
+
+@keyframes racing {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+.race-time {
+    font-weight: bold;
+    color: #e74c3c;
+    text-align: center;
+}
+
+#startRaceBtn {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Result Panel */
+.result-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.result-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 40px;
+    border-radius: 20px;
+    border: 3px solid #e74c3c;
+    max-width: 500px;
+    text-align: center;
+    animation: scaleIn 0.5s ease-out;
+}
+
+.result-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: bounce 1s ease-out;
+}
+
+.result-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-message {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 5px;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.result-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.continue-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border: none;
+    color: #ffffff;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.5);
+}
+
+.continue-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-right {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .mode-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .array-bar {
+        width: 35px;
+        font-size: 0.9rem;
+    }
+
+    .controls-panel {
+        flex-wrap: wrap;
+    }
+
+    .result-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .result-buttons {
+        flex-direction: column;
+    }
+
+    .continue-btn {
+        width: 100%;
+    }
+}

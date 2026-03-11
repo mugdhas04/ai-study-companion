@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Shooter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🎯 Equation Shooter</h1>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Lives</span>
+                    <span class="stat-value" id="lives">❤️❤️❤️</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Timer</span>
+                    <span class="stat-value" id="timer">30</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="equation-display">
+                <div class="equation" id="equation">Loading...</div>
+            </div>
+
+            <div class="targets-container" id="targets-container">
+                <!-- Answer targets will spawn here -->
+            </div>
+
+            <div class="input-section">
+                <input type="number" id="answer-input" placeholder="Enter answer..." autocomplete="off">
+                <button id="shoot-btn" class="btn btn-primary">🎯 SHOOT</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </main>
+
+        <div class="modal" id="game-over-modal">
+            <div class="modal-content">
+                <h2 id="modal-title">Game Over!</h2>
+                <p id="modal-message">Nice try!</p>
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <span class="stat-label">Final Score</span>
+                        <span class="stat-value" id="final-score">0</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="stat-label">Problems Solved</span>
+                        <span class="stat-value" id="problems-solved">0</span>
+                    </div>
+                </div>
+                <button id="restart-btn" class="btn btn-primary">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

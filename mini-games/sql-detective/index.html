@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Detective</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🔍 SQL Detective</h1>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Cases Solved</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Streak</span>
+                    <span class="stat-value" id="streak">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <div class="case-file">
+                <h2 id="case-title">Case #001: Find the Suspects</h2>
+                <div class="case-description" id="case-description">
+                    Loading case...
+                </div>
+            </div>
+
+            <div class="database-view">
+                <h3>📊 Database Tables</h3>
+                <div class="tables-container" id="tables-container">
+                    <!-- Tables will be rendered here -->
+                </div>
+            </div>
+
+            <div class="query-section">
+                <h3>💻 Write Your SQL Query</h3>
+                <div class="query-input-container">
+                    <textarea id="query-input" placeholder="SELECT * FROM ..."></textarea>
+                    <div class="query-buttons">
+                        <button id="run-query" class="btn btn-primary">▶ Run Query</button>
+                        <button id="hint-btn" class="btn btn-secondary">💡 Hint</button>
+                        <button id="clear-btn" class="btn btn-danger">🗑️ Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section" id="results-section">
+                <h3>📋 Query Results</h3>
+                <div class="results-container" id="results-container">
+                    <p class="placeholder-text">Run a query to see results...</p>
+                </div>
+            </div>
+
+            <div class="feedback-area" id="feedback-area"></div>
+        </main>
+
+        <div class="modal" id="success-modal">
+            <div class="modal-content">
+                <h2>🎉 Case Solved!</h2>
+                <p id="modal-message">Great detective work!</p>
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <span class="stat-label">XP Earned</span>
+                        <span class="stat-value" id="xp-earned">+100</span>
+                    </div>
+                </div>
+                <button id="next-case" class="btn btn-primary">Next Case →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

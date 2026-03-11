@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Explorer - AI Study Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <span class="game-icon">🗺️</span>
+                <h1>Graph Explorer</h1>
+            </div>
+            <div class="header-right">
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="levelDisplay">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Steps</span>
+                    <span class="stat-value" id="stepsDisplay">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="scoreDisplay">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mission Panel -->
+        <div class="panel mission-panel" id="missionPanel">
+            <div class="mission-icon">🧭</div>
+            <h2>Navigate the Graph Labyrinth!</h2>
+            <p id="missionText">Find the shortest path from START to END</p>
+            <div class="algorithm-select">
+                <p>Choose your algorithm:</p>
+                <div class="algo-buttons">
+                    <button class="algo-btn" data-algo="bfs">
+                        <span class="algo-icon">🌊</span>
+                        <span class="algo-name">BFS</span>
+                        <span class="algo-desc">Breadth First</span>
+                    </button>
+                    <button class="algo-btn" data-algo="dfs">
+                        <span class="algo-icon">🕳️</span>
+                        <span class="algo-name">DFS</span>
+                        <span class="algo-desc">Depth First</span>
+                    </button>
+                    <button class="algo-btn" data-algo="dijkstra">
+                        <span class="algo-icon">⚡</span>
+                        <span class="algo-name">Dijkstra</span>
+                        <span class="algo-desc">Shortest Path</span>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="startBtn">BEGIN EXPLORATION</button>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area hidden" id="gameArea">
+            <!-- Graph Canvas -->
+            <div class="graph-container">
+                <canvas id="graphCanvas" width="800" height="500"></canvas>
+            </div>
+
+            <!-- Path Display -->
+            <div class="path-panel">
+                <span class="label">Current Path:</span>
+                <div class="path-display" id="pathDisplay">
+                    <span class="path-node start">START</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-panel">
+                <button class="btn btn-secondary" id="undoBtn">↩️ Undo</button>
+                <button class="btn btn-hint" id="hintBtn">💡 Hint</button>
+                <button class="btn btn-danger" id="resetBtn">🔄 Reset</button>
+                <button class="btn btn-primary" id="submitBtn">✅ Submit Path</button>
+            </div>
+
+            <!-- Algorithm Info -->
+            <div class="algo-info-panel" id="algoInfo">
+                <div class="algo-info-icon">🌊</div>
+                <div class="algo-info-text">
+                    <strong>BFS Mode:</strong> Explore level by level. Click adjacent nodes to traverse.
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="panel result-panel hidden" id="resultPanel">
+            <div class="result-icon" id="resultIcon">🎉</div>
+            <h2 id="resultTitle">Path Found!</h2>
+            <p id="resultText">You navigated the labyrinth successfully!</p>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="stat-value" id="resultSteps">0</span>
+                    <span class="stat-label">Steps Taken</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value" id="resultOptimal">0</span>
+                    <span class="stat-label">Optimal Path</span>
+                </div>
+                <div class="result-stat">
+                    <span class="stat-value" id="resultXP">+50</span>
+                    <span class="stat-label">XP Earned</span>
+                </div>
+            </div>
+            <div class="result-buttons">
+                <button class="btn btn-primary" id="continueBtn">Continue →</button>
+                <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/api-client.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
